@@ -26,12 +26,12 @@ const Dropdown = ({ children }: PropsWithChildren) => {
     );
 };
 
-const Trigger = ({ children, headline }: PropsWithChildren & { headline: string }) => {
+const Trigger = ({ children, headline }: PropsWithChildren & { headline?: string }) => {
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
     return (
         <>
-            <div className="flex justify-between" onClick={toggleOpen}>{headline}{children}</div>
+            <div className="flex justify-between" onClick={toggleOpen}>{headline ?? ""}{children}</div>
             {open && <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>}
         </>
     );
