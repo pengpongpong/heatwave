@@ -34,8 +34,14 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // get emails, trim, concat-format
-        $regex = '/' . implode("|", array_map('trim', explode(",", config('app.allowed_email')))) . '/i';
 
+        $allowed_emails = explode(",", config('app.allowed_email'));
+        $format_emails = array_map(function($email) {
+            return '^' . trim($email) . '$';
+        }, $allowed_emails);
+
+        $regex = '/' . implode("|", $format_emails) . '/';
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => [
