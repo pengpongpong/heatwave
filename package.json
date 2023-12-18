@@ -27,6 +27,7 @@
     "dependencies": {
         "@react-three/drei": "^9.92.1",
         "@react-three/fiber": "^8.15.12",
+        "@sanity/image-url": "^1.0.2",
         "@types/three": "^0.159.0",
         "three": "^0.159.0"
     }

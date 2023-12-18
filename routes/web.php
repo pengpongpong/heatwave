@@ -18,11 +18,23 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+
+    $sanityClient = app("sanity");
+
+    $data = $sanityClient->fetch(
+        '*[_type == "landing"][0]'
+    );
+
+    $sanityConfig = [
+        'projectId' => config('app.sanity_project_id'),
+        'dataset' => config('app.sanity_dataset'),
+    ];
+
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        // 'canLogin' => Route::has('login'),
+        // 'canRegister' => Route::has('register'),
+        'sanityConfig' => $sanityConfig,
+        'data' => $data
     ]);
 });
 

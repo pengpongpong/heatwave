@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls, ScrollControls } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
 import Heatwave from "./Heatwave";
 
 const Intro = () => {
@@ -13,7 +13,6 @@ const Intro = () => {
                 left: 0,
                 width: "100vw",
                 height: "100vh",
-                border: "1px dashed black"
             }}
             camera={{
                 fov: 45,
@@ -25,7 +24,6 @@ const Intro = () => {
 
 
             <ScrollControls pages={2}>
-                {/* <OrbitControls makeDefault/> */}
                 <Heatwave />
             </ScrollControls>
         </Canvas>

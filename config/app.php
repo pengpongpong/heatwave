@@ -185,5 +185,9 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'allowed_email' => env('ALLOWED_EMAIL')
+    'allowed_email' => env('ALLOWED_EMAIL'),
+
+    'sanity_project_id' => env('SANTIY_PROJECTID'),
+    'sanity_dataset' => env('SANITY_DATASET'),
+    'sanity_api' => env('SANITY_API'),
 ];
