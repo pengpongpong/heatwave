@@ -23,5 +23,11 @@
         "tailwindcss": "^3.2.1",
         "typescript": "^5.0.2",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@react-three/drei": "^9.92.1",
+        "@react-three/fiber": "^8.15.12",
+        "@types/three": "^0.159.0",
+        "three": "^0.159.0"
     }
 }

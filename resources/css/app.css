@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+    --turquoise: #01b9c3;
+    --purple: #535295;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: black;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: radial-gradient(var(--turquoise), var(--purple));
+}
