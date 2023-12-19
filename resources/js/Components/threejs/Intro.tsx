@@ -3,8 +3,6 @@ import { ScrollControls } from "@react-three/drei";
 import Heatwave from "./Heatwave";
 
 const Intro = () => {
-
-
     return (
         <Canvas
             style={{
@@ -22,7 +20,6 @@ const Intro = () => {
 
             <ScrollControls pages={2}>
                 <Heatwave />
-                {null}
             </ScrollControls>
         </Canvas>
     )
