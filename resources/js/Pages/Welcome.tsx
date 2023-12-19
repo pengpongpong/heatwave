@@ -1,9 +1,9 @@
 import { Link, Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import Intro from "@/Components/threejs/Intro";
+// import Intro from "@/Components/threejs/Intro";
 import { ImageBuilderProps, urlFor } from "@/utils/utils";
 import Navbar from "@/Components/navbar/Navbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { inView } from "framer-motion";
 
 type LandingData = {
@@ -31,7 +31,7 @@ export default function Welcome({ auth, data, sanityConfig }: PageProps<{ data: 
             <Head title="Welcome" />
             <Navbar active={active} />
             <div className="w-screen h-screen">
-                <Intro />
+                {/* <Intro /> */}
             </div>
             <main className="m-4">
                 <h1 className="text-center text-6xl my-8">Heatwave</h1>

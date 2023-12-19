@@ -120,11 +120,9 @@ const Navbar = ({ active = false }: { active: boolean }) => {
                 className="lg:hidden p-2 rounded-xl fixed bottom-8 left-1/2 -translate-x-1/2 bg-blue"
                 ref={scope}
             >
-
-
                 <ul
 
-                    className={`flex flex-col overflow-hidden`}
+                    className={`w-0 h-0 flex flex-col overflow-hidden`}
                 >
                     <NavLinkMobile href={route("home")} title="Gallery" />
                     <NavLinkMobile href={route("home")} title="About" />

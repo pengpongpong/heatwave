@@ -26,7 +26,7 @@ const Dropdown = ({ children }: PropsWithChildren) => {
     );
 };
 
-const Trigger = ({ children, headline }: PropsWithChildren & { headline?: string }) => {
+const Trigger = ({ children, headline }: PropsWithChildren<{ headline?: string }>) => {
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
     return (
