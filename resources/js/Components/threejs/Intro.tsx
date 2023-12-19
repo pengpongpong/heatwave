@@ -8,9 +8,6 @@ const Intro = () => {
     return (
         <Canvas
             style={{
-                position: "relative",
-                top: 0,
-                left: 0,
                 width: "100vw",
                 height: "100vh",
             }}
@@ -21,7 +18,7 @@ const Intro = () => {
                 position: [0, 0, 6]
             }}
         >
-
+            <directionalLight intensity={5} position={[-1, -2, 3]} />
 
             <ScrollControls pages={2}>
                 <Heatwave />

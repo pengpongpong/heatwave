@@ -36,7 +36,7 @@ Route::get('/', function () {
         'sanityConfig' => $sanityConfig,
         'data' => $data
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -12,10 +12,9 @@ export default {
 
     theme: {
         extend: {
-            fontFamily: {
-                // sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-                // "coolvetica": ["Coolvetica"]
-            },
+            colors: {
+                blue: "#007099"
+            }
         },
     },
 
