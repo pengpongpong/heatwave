@@ -8,6 +8,7 @@ const Intro = () => {
             style={{
                 width: "100vw",
                 height: "100vh",
+                overscrollBehavior: "auto"
             }}
             camera={{
                 fov: 45,
@@ -18,7 +19,7 @@ const Intro = () => {
         >
             <directionalLight intensity={5} position={[-1, -2, 3]} />
 
-            <ScrollControls pages={2}>
+            <ScrollControls pages={1}>
                 <Heatwave />
             </ScrollControls>
         </Canvas>

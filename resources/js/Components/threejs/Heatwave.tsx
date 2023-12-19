@@ -17,7 +17,7 @@ const Heatwave = () => {
         const r1 = scroll.range(0, 1)
 
         if (modelRef.current) {
-            modelRef.current.rotation.y = MathUtils.damp(modelRef.current.rotation.y, (-Math.PI * 2) * r1, 2, delta)
+            modelRef.current.rotation.y = MathUtils.damp(modelRef.current.rotation.y, (-Math.PI * 2) * r1, 4, delta)
         }
 
     })

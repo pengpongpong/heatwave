@@ -130,7 +130,7 @@ const Navbar = ({ active = false }: { active: boolean }) => {
                     <NavLinkMobile href={route("home")} title="Contact" />
                 </ul>
 
-                <div className="flex justify-between gap-2">
+                <div className="flex justify-between gap-8">
                     <div className="flex items-center rounded-full border border-[#000255] overflow-hidden">
                         <img src="./heatwave_logo.png" width={50} />
                     </div>
