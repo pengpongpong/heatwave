@@ -22,11 +22,16 @@ html {
 
 body {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    background: radial-gradient(var(--turquoise) 70%, var(--purple));
+    background: radial-gradient(var(--turquoise) 70%, var(--purple) 110%);
     font-family: "coolvetica", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+nav {
+  background: radial-gradient(var(--purple) 70%, var(--turquoise) 150%);
 }
 
 // hamburger

@@ -1,11 +1,11 @@
 import React, { FormEvent } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
+import InputError from '@/Components/dashboard/InputError';
+import PrimaryButton from '@/Components/dashboard/PrimaryButton';
 import { useForm, Head } from '@inertiajs/react';
 import { EventProps, PageProps } from "@/types";
 
-import Event from "@/Components/Event";
+import Event from "@/Components/dashboard/Event";
 
 export default function Index({ auth, events }: PageProps & { events: EventProps[] }) {
     const { data, setData, post, processing, reset, errors } = useForm({

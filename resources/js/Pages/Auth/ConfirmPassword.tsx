@@ -1,9 +1,9 @@
 import { useEffect, FormEventHandler } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/dashboard/InputError';
+import InputLabel from '@/Components/dashboard/InputLabel';
+import PrimaryButton from '@/Components/dashboard/PrimaryButton';
+import TextInput from '@/Components/dashboard/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ConfirmPassword() {
@@ -27,11 +27,11 @@ export default function ConfirmPassword() {
         <GuestLayout>
             <Head title="Confirm Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-sm text-gray-600 text-center">
                 This is a secure area of the application. Please confirm your password before continuing.
             </div>
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="max-w-xl mx-auto">
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
 

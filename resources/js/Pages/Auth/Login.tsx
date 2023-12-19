@@ -1,10 +1,10 @@
 import { useEffect, FormEventHandler } from 'react';
-import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/dashboard/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/dashboard/InputError';
+import InputLabel from '@/Components/dashboard/InputLabel';
+import PrimaryButton from '@/Components/dashboard/PrimaryButton';
+import TextInput from '@/Components/dashboard/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} className="max-w-xl mx-auto">
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 

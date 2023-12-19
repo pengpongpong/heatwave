@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { PageProps } from '@/types';
-import NavLink from "@/Components/NavLink";
+import NavLink from "@/Components/dashboard/NavLink";
 
 export default function Dashboard({ auth }: PageProps) {
     return (
@@ -11,12 +11,12 @@ export default function Dashboard({ auth }: PageProps) {
         >
             <Head title="Events" />
 
-        <NavLink href={route('events.index')} active={route().current('events.index')}>Events</NavLink>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">You're logged in!</div>
+                        <NavLink className="ml-4 text-xl underline" href={route('events.index')} active={route().current('events.index')}>Events</NavLink>
                     </div>
                 </div>
             </div>

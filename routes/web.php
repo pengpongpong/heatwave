@@ -30,7 +30,7 @@ Route::get('/', function () {
         'dataset' => config('app.sanity_dataset'),
     ];
 
-    return Inertia::render('Welcome', [
+    return Inertia::render('Landing', [
         // 'canLogin' => Route::has('login'),
         // 'canRegister' => Route::has('register'),
         'sanityConfig' => $sanityConfig,

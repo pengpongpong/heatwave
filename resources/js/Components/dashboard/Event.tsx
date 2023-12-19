@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
-import Dropdown from '@/Components/Dropdown';
-import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
+import Dropdown from '@/Components/dashboard/Dropdown';
+import InputError from '@/Components/dashboard/InputError';
+import PrimaryButton from '@/Components/dashboard/PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
 
 import { EventProps } from "@/types";
