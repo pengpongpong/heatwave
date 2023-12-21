@@ -61,18 +61,18 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
             }}
             animate={active ? "active" : "hidden"}
             variants={{
-                "active": { y: 0, x: "-50%" },
-                "hidden": { y: "200%", x: "-50%" }
+                "active": { y: 0 },
+                "hidden": { y: "200%" }
             }}
             transition={{
                 duration: .5,
                 ease: easeInOut
             }}
-            className="lg:hidden p-2 rounded-xl fixed bottom-8 left-1/2 -translate-x-1/2 bg-blue"
+            className="lg:hidden p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             ref={scope}
         >
             <ul className={`w-0 h-0 flex flex-col overflow-hidden`}>
-                <NavLinkMobile href={route("home")}>Gallery</NavLinkMobile>
+                <NavLinkMobile href={route("gallery")}>Gallery</NavLinkMobile>
                 <NavLinkMobile href={route("home")}>About</NavLinkMobile>
                 <NavLinkMobile href={route("home")}>The Crew</NavLinkMobile>
                 <NavLinkMobile href={route("home")} className="mb-8">Contact</NavLinkMobile>

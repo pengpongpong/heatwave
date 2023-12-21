@@ -7,13 +7,16 @@ import Footer from "@/Components/footer/Footer";
 type MainLayoutProps = {
     children: ReactNode;
     title: string;
+    hideNav: boolean;
 }
 
-const MainLayout = ({ children, title }: MainLayoutProps) => {
+const MainLayout = ({ children, title, hideNav }: MainLayoutProps) => {
     return (
         <>
             <Head title={title} />
-            <Navbar />
+            <div className="flex justify-center">
+                <Navbar hideNav={hideNav}/>
+            </div>
             {children}
             <Footer />
         </>

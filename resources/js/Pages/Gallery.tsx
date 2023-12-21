@@ -1,10 +1,22 @@
-import React from 'react'
+import SwiperGallery from "@/Components/swiper/SwiperGallery"
+import MainLayout from "@/Layouts/MainLayout"
 
-type Props = {}
+type GalleryProps = {
+  hideNav: boolean,
+  data: {
+    images: string[]
+  },
+}
 
-const Gallery = (props: Props) => {
+const Gallery = ({ hideNav, data }: GalleryProps) => {
+
   return (
-    <div>Gallery</div>
+    <MainLayout title="Gallery" hideNav={hideNav}>
+      <main className="flex-grow">
+        <h1 className="mt-12 text-center text-4xl tracking-wider">Gallery</h1>
+        <SwiperGallery data={data} />
+      </main>
+    </MainLayout>
   )
 }
 

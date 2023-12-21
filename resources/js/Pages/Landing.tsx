@@ -1,10 +1,7 @@
-import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import { ImageBuilderProps, urlFor } from "@/utils/utils";
 
 import Intro from "@/Components/threejs/Intro";
-import Navbar from "@/Components/navbar/Navbar";
-import Footer from "@/Components/footer/Footer";
 import MainLayout from "@/Layouts/MainLayout";
 
 type LandingData = {
@@ -18,10 +15,16 @@ type LandingData = {
     }
 }
 
-export default function Landing({ data, sanityConfig }: PageProps<{ data: LandingData, sanityConfig: ImageBuilderProps['sanityConfig'] }>) {
+type LandingProps = {
+    data: LandingData;
+    sanityConfig: ImageBuilderProps['sanityConfig'] ;
+    hideNav: boolean;
+}
+
+export default function Landing({ data, sanityConfig, hideNav }: PageProps<LandingProps>) {
     return (
         <>
-            <MainLayout title="Heatwave">
+            <MainLayout title="Heatwave" hideNav={hideNav}>
                 <div className="w-screen h-screen">
                     <Intro />
                 </div>

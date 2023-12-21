@@ -1,0 +1,24 @@
+.swiper-container {
+  height: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 10;
+}
+
+.swiper-material {
+  height: 70vh;
+  width: calc(100% - 32px);
+  max-width: 90vw;
+}
+
+.swiper-material-image {
+  position: absolute;
+  left: 0%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--swiper-material-slide-border-radius);
+}

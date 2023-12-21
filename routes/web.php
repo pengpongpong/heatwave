@@ -19,7 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
 
-    $sanityClient = app("sanity");
+    $sanityClient = app('sanity');
 
     $data = $sanityClient->fetch(
         '*[_type == "landing"][0]'
@@ -34,13 +34,24 @@ Route::get('/', function () {
         // 'canLogin' => Route::has('login'),
         // 'canRegister' => Route::has('register'),
         'sanityConfig' => $sanityConfig,
-        'data' => $data
+        'data' => $data,
+        'hideNav' => true
     ]);
 })->name('home');
 
 Route::get('/gallery', function () {
-    return Inertia::render('Gallery', []);
-});
+
+    $sanityClient = app('sanity');
+
+    $data = $sanityClient->fetch(
+        '*[_type == "gallery"][0]{"images": images[].asset->url}'
+    );
+
+    return Inertia::render('Gallery', [
+        'data' => $data,
+        'hideNav' => false
+    ]);
+})->name('gallery');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
