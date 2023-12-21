@@ -21,7 +21,7 @@ const SwiperSlide = ({ image }: { image: string }) => {
                     {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
                     <img
                         className="swiper-material-image"
-                        data-swiper-material-scale="1.25"
+                        data-swiper-material-scale="1"
                         width={428}
                         height={626}
                         src={urlFor(image).size(1638, 2048).getUrl()}
@@ -66,7 +66,7 @@ const SwiperGallery = ({ data }: SwiperGalleryProps) => {
             <div className="swiper">
                 <div className="swiper-wrapper">
                     {data.images.map((img) => (
-                        <SwiperSlide image={img} />
+                        <SwiperSlide image={img} key={img}/>
                     ))}
                 </div>
             </div>

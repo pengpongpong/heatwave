@@ -6,7 +6,7 @@ import NavLink from "./NavLink";
 import NavbarMobile from "./NavbarMobile";
 
 
-const Navbar = ({ hideNav }: { hideNav: boolean }) => {
+const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
     const [active, setActive] = useState(hideNav ? false : true)
 
     // hide navbar if main is not visible for 3D model
@@ -45,7 +45,7 @@ const Navbar = ({ hideNav }: { hideNav: boolean }) => {
                     </Link>
                     <ul className={`flex gap-4 overflow-hidden`}>
                         <NavLink href={route("gallery")} title="Gallery" />
-                        <NavLink href={route("home")} title="About" />
+                        <NavLink href={route("about")} title="About" />
                         <NavLink href={route("home")} title="The Crew" />
                         <NavLink href={route("home")} title="Contact" />
                     </ul>
