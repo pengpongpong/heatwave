@@ -22,18 +22,18 @@ Route::get('/', function () {
     $sanityClient = app('sanity');
 
     $data = $sanityClient->fetch(
-        '*[_type == "landing"][0]'
+        '*[_type == "landing"][0]
+        {
+            "firstLandscape": images.firstLandscape.asset->url,
+            "firstPortrait": images.firstPortrait.asset->url,
+            "secondLandscape": images.secondLandscape.asset->url,
+            "secondPortrait": images.secondPortrait.asset->url,
+        }'
     );
-
-    $sanityConfig = [
-        'projectId' => config('app.sanity_project_id'),
-        'dataset' => config('app.sanity_dataset'),
-    ];
 
     return Inertia::render('Landing', [
         // 'canLogin' => Route::has('login'),
         // 'canRegister' => Route::has('register'),
-        'sanityConfig' => $sanityConfig,
         'data' => $data,
         'hideNav' => true
     ]);

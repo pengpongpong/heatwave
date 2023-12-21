@@ -1,27 +1,23 @@
 import { PageProps } from '@/types';
-import { ImageBuilderProps, urlFor } from "@/utils/utils";
+import { urlFor } from "@/utils/utils";
 
 import Intro from "@/Components/threejs/Intro";
 import MainLayout from "@/Layouts/MainLayout";
 
 type LandingData = {
-    slug: string;
-    title: string;
-    images: {
-        firstPortrait: ImageBuilderProps["image"]
-        firstLandscape: ImageBuilderProps["image"]
-        secondPortrait: ImageBuilderProps["image"]
-        secondLandscape: ImageBuilderProps["image"]
-    }
+    firstPortrait: string
+    firstLandscape: string
+    secondPortrait: string
+    secondLandscape: string
+
 }
 
 type LandingProps = {
     data: LandingData;
-    sanityConfig: ImageBuilderProps['sanityConfig'] ;
     hideNav: boolean;
 }
 
-export default function Landing({ data, sanityConfig, hideNav }: PageProps<LandingProps>) {
+export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
     return (
         <>
             <MainLayout title="Heatwave" hideNav={hideNav}>
@@ -32,12 +28,12 @@ export default function Landing({ data, sanityConfig, hideNav }: PageProps<Landi
                     <h1 className="text-center text-6xl my-8">Heatwave</h1>
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                            <img src={urlFor(data.images.firstPortrait, sanityConfig).fit('max').size(1847, 2309).url()} width={600} className="lg:col-span-2 w-full h-full object-cover" />
-                            <img src={urlFor(data.images.firstLandscape, sanityConfig).fit('max').size(2920, 2336).url()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
+                            <img src={urlFor(data.firstPortrait).size(1847, 2309).getUrl()} width={600} className="lg:col-span-2 w-full h-full object-cover" />
+                            <img src={urlFor(data.firstLandscape).size(2920, 2336).getUrl()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                            <img src={urlFor(data.images.secondLandscape, sanityConfig).fit('max').size(2920, 2336).url()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
-                            <img src={urlFor(data.images.secondPortrait, sanityConfig).fit('max').size(1847, 2309).url()} width={600} className="lg:col-span-2 w-full h-full object-cover" />
+                            <img src={urlFor(data.secondLandscape).size(2920, 2336).getUrl()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
+                            <img src={urlFor(data.secondPortrait).size(1847, 2309).getUrl()} width={600} className="lg:col-span-2 w-full h-full object-cover" />
                         </div>
                     </div>
                 </main>

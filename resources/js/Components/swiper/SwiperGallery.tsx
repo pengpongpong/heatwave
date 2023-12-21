@@ -5,6 +5,7 @@ import EffectMaterial from './effect-material.esm.js';
 import 'swiper/scss';
 import './effect-material.scss';
 import './index.scss';
+import { urlFor } from "@/utils/utils.js";
 
 type SwiperGalleryProps = {
     data: {
@@ -18,7 +19,14 @@ const SwiperSlide = ({ image }: { image: string }) => {
             <div className="swiper-material-wrapper">
                 <div className="swiper-material-content">
                     {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
-                    <img className="swiper-material-image" data-swiper-material-scale="1.25" src={image} alt="Heatwave party" />
+                    <img
+                        className="swiper-material-image"
+                        data-swiper-material-scale="1.25"
+                        width={428}
+                        height={626}
+                        src={urlFor(image).size(1638, 2048).getUrl()}
+                        alt="Heatwave party"
+                    />
                 </div>
             </div>
         </div>
