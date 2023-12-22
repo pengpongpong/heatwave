@@ -28,7 +28,7 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
                 initial={{
                     y: "200%"
                 }}
-                animate={ active ? "active" : "hidden"}
+                animate={active ? "active" : "hidden"}
                 variants={{
                     "active": { y: 0 },
                     "hidden": { y: "200%" }
@@ -40,15 +40,15 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
                 className="hidden lg:block p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             >
                 <div className="flex items-center gap-6">
-                    <Link href={route("home")} className="relative flex items-center rounded-full border border-[#dafbf7] hover:border-black hover:scale-110 bg-[#01b9c3] transition-all duration-300 cursor-pointer overflow-hidden">
+                    <Link href={route("home")} className={`relative flex items-center rounded-full border ${route().current("home") ? "border-[#000000]" : "border-[#dafbf7]"} hover:border-black hover:scale-110 bg-[#01b9c3] transition-all duration-300 cursor-pointer overflow-hidden`}>
                         <img src="./heatwave_logo.png" width={50} />
                     </Link>
                     <ul className={`flex gap-4 overflow-hidden`}>
-                        <NavLink href={route("gallery")} title="Gallery" />
-                        <NavLink href={route("event")} title="Events" />
-                        <NavLink href={route("about")} title="About" />
-                        <NavLink href={route("home")} title="The Crew" />
-                        <NavLink href={route("home")} title="Contact" />
+                        <NavLink href={route("gallery")} title="Gallery" active={route().current("gallery")} />
+                        <NavLink href={route("event")} title="Events" active={route().current("event")} />
+                        <NavLink href={route("about")} title="About" active={route().current("about")} />
+                        <NavLink href={route("theCrew")} title="The Crew" active={route().current("theCrew")} />
+                        <NavLink href={route("home")} title="Contact" active={route().current("home")} />
                     </ul>
                 </div>
             </motion.nav>

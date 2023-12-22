@@ -61,15 +61,15 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
             ref={scope}
         >
             <ul className={`flex flex-col overflow-hidden`}>
-                <NavLinkMobile href={route("gallery")}>Gallery</NavLinkMobile>
-                <NavLinkMobile href={route("event")}>Events</NavLinkMobile>
-                <NavLinkMobile href={route("about")}>About</NavLinkMobile>
-                <NavLinkMobile href={route("home")}>The Crew</NavLinkMobile>
-                <NavLinkMobile href={route("home")} className="mb-8">Contact</NavLinkMobile>
+                <NavLinkMobile href={route("gallery")} active={route().current("gallery")}>Gallery</NavLinkMobile>
+                <NavLinkMobile href={route("event")} active={route().current("event")}>Events</NavLinkMobile>
+                <NavLinkMobile href={route("about")} active={route().current("about")}>About</NavLinkMobile>
+                <NavLinkMobile href={route("theCrew")} active={route().current("theCrew")}>The Crew</NavLinkMobile>
+                <NavLinkMobile href={route("home")} active={route().current("home")} className="mb-8">Contact</NavLinkMobile>
             </ul>
 
             <div className="flex justify-between gap-8">
-                <Link href={route("home")} className="flex items-center rounded-full border border-white overflow-hidden">
+                <Link href={route("home")} className={`flex items-center rounded-full border ${route().current("home") ? "border-[#000000]" : "border-[#dafbf7]"} overflow-hidden`}>
                     <img src="./heatwave_logo.png" width={50} />
                 </Link>
                 <Hamburger inputRef={inputRef} onClick={handleShow} />

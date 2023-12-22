@@ -12,15 +12,13 @@ type EventSwiperSlideProps = {
     imageUrl: string;
 }
 
+// Swiper slide
 const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl }: EventSwiperSlideProps) => {
     return (
         <div className="swiper-slide">
-            {/* <!-- Expanding collection container, required element --> */}
             <div className="expanding-collection-container">
-                {/* <!-- Expanding collection content that opens underneath the cover image on click --> */}
                 <div className="expanding-collection-content">
                     <div className="expanding-collection-content-inner">
-                        {/* <!-- Put any required content here --> */}
                         <div>
                             <div className="text-center text-xl xl:text-2xl">{title + " - " + location}</div>
                             <div className="mt-6 flex justify-between xl:text-lg">
@@ -36,7 +34,7 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl }: Ev
                     </div>
                 </div>
 
-                {/* <!-- Expanding collection cover, can contain any HTML content --> */}
+                {/* Expanding collection cover */}
                 <div className="expanding-collection-cover">
                     <img src={imageUrl} />
                 </div>
@@ -45,7 +43,40 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl }: Ev
     )
 }
 
-
+const eventData = [
+    {
+        title: "Heatwave #4",
+        location: "Schrille Grille",
+        date: "01/10/23",
+        time: "19:00",
+        artists: "DJ Raifu, Cloud.G",
+        imageUrl: "/heatwave_event4.jpeg"
+    },
+    {
+        title: "Heatwave #3",
+        location: "PPC",
+        date: "01/10/23",
+        time: "19:00",
+        artists: "DJ Raifu, Tori",
+        imageUrl: "/heatwave_event3.jpeg"
+    },
+    {
+        title: "Heatwave #2",
+        location: "Schrille Grille",
+        date: "01/10/23",
+        time: "19:00",
+        artists: "DJ Raifu, Noah Trembley, Vienca",
+        imageUrl: "/heatwave_event2.jpeg"
+    },
+    {
+        title: "Heatwave #1",
+        location: "Schrille Grille",
+        date: "01/10/23",
+        time: "19:00",
+        artists: "DJ Raifu, Noah Trembley",
+        imageUrl: "/heatwave_event1.jpeg"
+    },
+]
 
 const EventSwiper = () => {
     useEffect(() => {
@@ -59,38 +90,17 @@ const EventSwiper = () => {
             <div className="expanding-collection">
                 <div className="swiper">
                     <div className="swiper-wrapper">
-                        <EventSwiperSlide
-                            title="Heatwave #4"
-                            location="Schrille Grille"
-                            date="01/10/23"
-                            time="19:00"
-                            artists={"DJ Raifu, Cloud.G"}
-                            imageUrl="/heatwave_event4.jpeg"
-                        />
-                        <EventSwiperSlide
-                            title="Heatwave #3"
-                            location="PPC"
-                            date="01/10/23"
-                            time="19:00"
-                            artists={"DJ Raifu, Tori"}
-                            imageUrl="/heatwave_event3.jpeg"
-                        />
-                        <EventSwiperSlide
-                            title="Heatwave #2"
-                            location="Schrille Grille"
-                            date="01/10/23"
-                            time="19:00"
-                            artists={"DJ Raifu, Noah Trembley, Vienca"}
-                            imageUrl="/heatwave_event2.jpeg"
-                        />
-                        <EventSwiperSlide
-                            title="Heatwave #1"
-                            location="Schrille Grille"
-                            date="01/10/23"
-                            time="19:00"
-                            artists={"DJ Raifu, Noah Trembley"}
-                            imageUrl="/heatwave_event1.jpeg"
-                        />
+                        {eventData.map((event) => (
+                            <EventSwiperSlide
+                                title={event.title}
+                                location={event.location}
+                                time={event.time}
+                                date={event.date}
+                                artists={event.artists}
+                                imageUrl={event.imageUrl}
+                                key={event.title}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

@@ -1,10 +1,8 @@
 import MainLayout from "@/Layouts/MainLayout"
-
 import EventSwiper from "@/Components/event-swiper/EventSwiper"
 
-type Props = {}
 
-const Events = (props: Props) => {
+const Events = () => {
   return (
     <MainLayout title="Events" hideNav={false}>
       <main className="flex flex-col items-center flex-grow">

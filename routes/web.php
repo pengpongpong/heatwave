@@ -61,6 +61,10 @@ Route::get('/event', function () {
     return Inertia::render('Events', []);
 })->name('event');
 
+Route::get('/the-crew', function () {
+    return Inertia::render('TheCrew', []);
+})->name('theCrew');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
