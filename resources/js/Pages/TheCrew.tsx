@@ -1,5 +1,4 @@
 import MainLayout from "@/Layouts/MainLayout"
-import React from 'react'
 
 const CrewSlide = ({ imageUrl }: { imageUrl: string }) => {
     return (
@@ -34,8 +33,8 @@ const CrewSlide = ({ imageUrl }: { imageUrl: string }) => {
                         href={route("home")}
                         className="flex gap-2"
                     >
-                        <img src="/bx-envelope.svg" width={25} alt="Contact" />
-                        Contact
+                        <img src="/bx-envelope.svg" width={25} alt="Mail icon" />
+                        Kontakt
                     </a>
                 </li>
             </ul>
@@ -76,8 +75,8 @@ const CrewSlideReverse = ({ imageUrl }: { imageUrl: string }) => {
                         href={route("home")}
                         className="flex gap-2"
                     >
-                        Contact
-                        <img src="/bx-envelope.svg" width={25} alt="Contact" />
+                        Kontakt
+                        <img src="/bx-envelope.svg" width={25} alt="Mail" />
                     </a>
                 </li>
             </ul>
@@ -91,7 +90,7 @@ const TheCrew = () => {
             title="The Crew"
             hideNav={false}>
             <main className="pb-8 flex flex-col flex-grow gap-4">
-                <h1 className="my-8 text-2xl lg:text-6xl text-center">The Crew</h1>
+                <h1 className="my-8 text-2xl lg:text-6xl text-center">Die Crew</h1>
 
                 <div className="flex lg:hidden flex-col gap-4">
                     <CrewSlide imageUrl="/screen.png" />

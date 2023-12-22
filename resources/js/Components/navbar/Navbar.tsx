@@ -44,14 +44,14 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
                         <img src="./heatwave_logo.png" width={50} />
                     </Link>
                     <ul className={`flex gap-4 overflow-hidden`}>
-                        <NavLink href={route("gallery")} title="Gallery" active={route().current("gallery")} />
-                        <NavLink href={route("event")} title="Events" active={route().current("event")} />
-                        <NavLink href={route("about")} title="About" active={route().current("about")} />
-                        <NavLink href={route("theCrew")} title="The Crew" active={route().current("theCrew")} />
-                        <NavLink href={route("home")} title="Contact" active={route().current("home")} />
-                    </ul>
-                </div>
-            </motion.nav>
+                        <NavLink href={route("gallery")} active={route().current("gallery")} >Galerie</NavLink>
+                        <NavLink href={route("event")} active={route().current("event")} >Events</NavLink>
+                        <NavLink href={route("about")} active={route().current("about")} >Über uns</NavLink>
+                        <NavLink href={route("theCrew")} active={route().current("theCrew")} >Die Crew</NavLink>
+                    <NavLink href={route("contact")} active={route().current("contact")} >Kontakt</NavLink>
+                </ul>
+            </div>
+        </motion.nav >
         </>
     )
 }

@@ -13,7 +13,9 @@ export default {
     theme: {
         extend: {
             colors: {
-                blue: "#007099"
+                blue: "#007099",
+                lightBlue: "#dafbf7",
+                purple: "#535295"
             }
         },
     },

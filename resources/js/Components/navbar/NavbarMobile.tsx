@@ -61,11 +61,11 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
             ref={scope}
         >
             <ul className={`flex flex-col overflow-hidden`}>
-                <NavLinkMobile href={route("gallery")} active={route().current("gallery")}>Gallery</NavLinkMobile>
+                <NavLinkMobile href={route("gallery")} active={route().current("gallery")}>Galerie</NavLinkMobile>
                 <NavLinkMobile href={route("event")} active={route().current("event")}>Events</NavLinkMobile>
-                <NavLinkMobile href={route("about")} active={route().current("about")}>About</NavLinkMobile>
-                <NavLinkMobile href={route("theCrew")} active={route().current("theCrew")}>The Crew</NavLinkMobile>
-                <NavLinkMobile href={route("home")} active={route().current("home")} className="mb-8">Contact</NavLinkMobile>
+                <NavLinkMobile href={route("about")} active={route().current("about")}>Über uns</NavLinkMobile>
+                <NavLinkMobile href={route("theCrew")} active={route().current("theCrew")}>Die Crew</NavLinkMobile>
+                <NavLinkMobile href={route("contact")} active={route().current("contact")} className="mb-8">Kontakt</NavLinkMobile>
             </ul>
 
             <div className="flex justify-between gap-8">

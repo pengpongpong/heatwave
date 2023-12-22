@@ -39,7 +39,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/gallery', function () {
+Route::get('/galerie', function () {
 
     $sanityClient = app('sanity');
 
@@ -53,7 +53,7 @@ Route::get('/gallery', function () {
     ]);
 })->name('gallery');
 
-Route::get('/about', function () {
+Route::get('/ueber-uns', function () {
     return Inertia::render('About', []);
 })->name('about');
 
@@ -61,9 +61,13 @@ Route::get('/event', function () {
     return Inertia::render('Events', []);
 })->name('event');
 
-Route::get('/the-crew', function () {
+Route::get('/crew', function () {
     return Inertia::render('TheCrew', []);
 })->name('theCrew');
+
+Route::get('/kontakt', function () {
+    return Inertia::render('Contact', []);
+})->name('contact');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
