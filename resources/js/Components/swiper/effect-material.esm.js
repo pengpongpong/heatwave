@@ -322,9 +322,9 @@ export default function EffectMaterial({ swiper, on }) {
         lastItem + swiper.slidesSizesGrid[0] + swiper.params.spaceBetween,
       );
     }
-    // swiper.el.style.setProperty(
-    //   '--swiper-material-slide-size',
-    //   `${swiper.slidesSizesGrid[0]}px`,
-    // );
+    swiper.el.style.setProperty(
+      '--swiper-material-slide-size',
+      `${swiper.slidesSizesGrid[0]}px`,
+    );
   });
 }

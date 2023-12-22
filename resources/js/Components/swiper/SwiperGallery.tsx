@@ -15,7 +15,7 @@ type SwiperGalleryProps = {
 
 const SwiperSlide = ({ image }: { image: string }) => {
     return (
-        <div className="swiper-slide">
+        <div className="swiper-slide min-w-fit">
             <div className="swiper-material-wrapper">
                 <div className="swiper-material-content">
                     {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
