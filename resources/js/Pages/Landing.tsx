@@ -25,7 +25,7 @@ export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
                     <Intro />
                 </div>
                 <main className="m-4" id="main">
-                    <h1 className="text-center text-6xl my-8">Heatwave</h1>
+                    <h1 className="text-6xl my-8">Heatwave</h1>
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
                             <img src={urlFor(data.firstPortrait).size(1847, 2309).getUrl()} width={600} className="lg:col-span-2 w-full h-full object-cover" />

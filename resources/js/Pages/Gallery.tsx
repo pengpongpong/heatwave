@@ -13,7 +13,7 @@ const Gallery = ({ hideNav, data }: GalleryProps) => {
   return (
     <MainLayout title="Gallery" hideNav={hideNav}>
       <main className="flex-grow">
-        <h1 className="mt-12 text-center text-4xl tracking-wider">Gallery</h1>
+        <h1 className="mt-12 text-4xl text-center tracking-wider">Gallery</h1>
         <SwiperGallery data={data} />
       </main>
     </MainLayout>

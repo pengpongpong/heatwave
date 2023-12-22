@@ -26,7 +26,7 @@ const About = (props: Props) => {
                     </li>
                     <li className="mb-2">
                         <Link
-                            href={route("home")}
+                            href={route("event")}
                             className="flex gap-2"
                         >
                             <img src="/bx-calendar-event.svg" width={25} alt="Events" />
@@ -43,6 +43,7 @@ const About = (props: Props) => {
                         </Link>
                     </li>
                 </ul>
+                <h2 className="mt-8 text-3xl tracking-wider">HEATWAVE EST. 2023</h2>
             </main>
         </MainLayout>
     )

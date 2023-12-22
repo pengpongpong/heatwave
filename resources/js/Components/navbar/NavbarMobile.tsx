@@ -13,16 +13,11 @@ const handleAnimation = (isOpen: boolean) => {
             ? [
                 [
                     "ul",
-                    { display: "flex" }
+                    { width: "300px" },
                 ],
                 [
                     "ul",
-                    { width: "300px", },
-                    { at: "<", }
-                ],
-                [
-                    "ul",
-                    { height: "300px", }
+                    { height: "372px" },
                 ]
             ]
             : [
@@ -33,12 +28,6 @@ const handleAnimation = (isOpen: boolean) => {
                 [
                     "ul",
                     { width: "0px", },
-                ],
-                [
-                    "ul",
-                    { display: "none" },
-                    { at: "<", }
-
                 ]
             ])
     }, [isOpen])
@@ -71,8 +60,9 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
             className="lg:hidden p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             ref={scope}
         >
-            <ul className={`w-0 h-0 flex flex-col overflow-hidden`}>
+            <ul className={`flex flex-col overflow-hidden`}>
                 <NavLinkMobile href={route("gallery")}>Gallery</NavLinkMobile>
+                <NavLinkMobile href={route("event")}>Events</NavLinkMobile>
                 <NavLinkMobile href={route("about")}>About</NavLinkMobile>
                 <NavLinkMobile href={route("home")}>The Crew</NavLinkMobile>
                 <NavLinkMobile href={route("home")} className="mb-8">Contact</NavLinkMobile>
