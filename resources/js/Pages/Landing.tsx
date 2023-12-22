@@ -24,7 +24,7 @@ export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
                 <div className="w-screen h-screen">
                     <Intro />
                 </div>
-                <main className="m-4" id="main">
+                <main className="m-4 lg:m-12" id="main">
                     <h1 className="my-8 text-4xl text-center">Heatwave</h1>
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
