@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { ScrollControls } from "@react-three/drei";
+import { ScrollControls, Text } from "@react-three/drei";
 import Heatwave from "./Heatwave";
 
 const Intro = () => {
@@ -19,7 +19,7 @@ const Intro = () => {
         >
             <directionalLight intensity={5} position={[-1, -2, 3]} />
 
-            <ScrollControls pages={1}>
+            <ScrollControls pages={1} style={{scrollbarWidth: "none"}}>
                 <Heatwave />
             </ScrollControls>
         </Canvas>
