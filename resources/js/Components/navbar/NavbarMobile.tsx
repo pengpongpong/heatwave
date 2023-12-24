@@ -13,7 +13,7 @@ const handleAnimation = (isOpen: boolean) => {
             ? [
                 [
                     "ul",
-                    { width: "300px" },
+                    { width: "80vw" },
                 ],
                 [
                     "ul",
@@ -27,7 +27,7 @@ const handleAnimation = (isOpen: boolean) => {
                 ],
                 [
                     "ul",
-                    { width: "0px", },
+                    { width: "0vw", },
                 ]
             ])
     }, [isOpen])

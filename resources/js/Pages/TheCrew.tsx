@@ -2,7 +2,7 @@ import MainLayout from "@/Layouts/MainLayout"
 
 const CrewSlide = ({ imageUrl }: { imageUrl: string }) => {
     return (
-        <div className="flex flex-col xl:flex-row gap-4 justify-center items-center">
+        <div className="mb-8 flex flex-col xl:flex-row gap-4 justify-center items-center">
             <div className="max-w-3xl mx-4 px-4 py-2 flex flex-col xl:flex-row gap-6 rounded-xl">
                 <img className="w-fit xl:w-40 rounded-xl" width={200} src={imageUrl} alt="" />
                 <p className="lg:text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -44,7 +44,7 @@ const CrewSlide = ({ imageUrl }: { imageUrl: string }) => {
 
 const CrewSlideReverse = ({ imageUrl }: { imageUrl: string }) => {
     return (
-        <div className="flex flex-col xl:flex-row-reverse gap-4 justify-center items-center">
+        <div className="mb-8 flex flex-col xl:flex-row-reverse gap-4 justify-center items-center">
             <div className="max-w-3xl mx-4 px-4 py-2 flex flex-col xl:flex-row-reverse gap-4 rounded-xl">
                 <img className="w-fit xl:w-40 rounded-xl" width={200} src={imageUrl} alt="" />
                 <p className="lg:text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>

@@ -21,7 +21,7 @@ const Contact = () => {
 
     return (
         <MainLayout title="Contact" hideNav={false}>
-            <main className="w-full p-4 flex-grow">
+            <main className="w-full p-8 flex-grow">
                 <h1 className="my-8 text-2xl lg:text-6xl text-center">Kontaktiere uns!</h1>
 
                 <div>
@@ -99,7 +99,7 @@ const Contact = () => {
 
                         <InputError message={errors.email} className="mt-2" />
                     </div>
-                    <button className="mt-6 px-4 py-2 w-full rounded-lg bg-purple text-lightBlue shadow-xl">Senden</button>
+                    <button className="mt-6 px-4 py-3 w-full rounded-lg bg-purple text-lightBlue shadow-xl">Senden</button>
                 </form>
             </main>
         </MainLayout>
