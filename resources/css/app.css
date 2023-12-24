@@ -34,6 +34,10 @@ body {
   min-height: 100dvh;
 }
 
+canvas {
+  scrollbar-width: none;
+}
+
 nav {
   background: radial-gradient(var(--purple) 70%, var(--turquoise) 150%);
 }
