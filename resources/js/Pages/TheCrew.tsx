@@ -93,13 +93,15 @@ const TheCrew = () => {
                 <h1 className="my-8 text-2xl lg:text-6xl text-center">Die Crew</h1>
 
                 <div className="flex lg:hidden flex-col gap-4">
-                    <CrewSlide imageUrl="/screen.png" />
-                    <CrewSlide imageUrl="/screen2.png" />
+                    <CrewSlide imageUrl="/crew.png" />
+                    <CrewSlide imageUrl="/crew2.png" />
+                    <CrewSlide imageUrl="/crew.png" />
                 </div>
 
                 <div className="hidden lg:flex flex-col gap-4">
-                    <CrewSlide imageUrl="/screen.png" />
-                    <CrewSlideReverse imageUrl="/screen2.png" />
+                    <CrewSlide imageUrl="/crew.png" />
+                    <CrewSlideReverse imageUrl="/crew2.png" />
+                    <CrewSlide imageUrl="/crew.png" />
                 </div>
 
             </main>
