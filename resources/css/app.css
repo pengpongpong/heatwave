@@ -36,6 +36,11 @@ body {
 
 canvas {
   scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+canvas::webkit-scrollbar {
+  display: none;
 }
 
 nav {

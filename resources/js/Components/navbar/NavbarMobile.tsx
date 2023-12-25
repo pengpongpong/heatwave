@@ -60,7 +60,7 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
             className="lg:hidden p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             ref={scope}
         >
-            <ul className={`w-[0vw] flex flex-col overflow-hidden`}>
+            <ul className={`w-[0vw] h-0 flex flex-col overflow-hidden`}>
                 <NavLinkMobile href={route("gallery")} active={route().current("gallery")}>Galerie</NavLinkMobile>
                 <NavLinkMobile href={route("event")} active={route().current("event")}>Events</NavLinkMobile>
                 <NavLinkMobile href={route("about")} active={route().current("about")}>Über uns</NavLinkMobile>

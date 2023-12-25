@@ -6,6 +6,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\SendEmailController;
+
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,8 +70,17 @@ Route::get('/crew', function () {
 })->name('theCrew');
 
 Route::get('/kontakt', function () {
-    return Inertia::render('Contact', []);
+
+    $error = Session::get('error');
+    $success = Session::get('success');
+
+    return Inertia::render('Contact', [
+        'error' => $error,
+        'success' => $success
+    ]);
 })->name('contact');
+
+Route::post('/kontakt', [SendEmailController::class, 'index'])->name('kontakt');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

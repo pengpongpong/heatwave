@@ -7,7 +7,7 @@ const Footer = () => {
                 href={"https://www.instagram.com/heatwave.association/"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-0 right-4 lg:right-12"
+                className="absolute bottom-0 right-4 lg:right-8"
             >
                 <img className="inline" src="/bxl-instagram.svg" width={25} alt="Instagram" />
             </a>
