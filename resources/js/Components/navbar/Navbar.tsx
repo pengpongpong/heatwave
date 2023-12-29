@@ -37,7 +37,7 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
                     duration: .5,
                     ease: easeInOut
                 }}
-                className="hidden lg:block p-2 rounded-xl fixed bottom-8 bg-blue z-50"
+                className="nav hidden lg:block p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             >
                 <div className="flex items-center gap-6">
                     <Link href={route("home")} className={`relative flex items-center rounded-full border ${route().current("home") ? "border-[#000000]" : "border-[#dafbf7]"} hover:border-black hover:scale-110 bg-[#01b9c3] transition-all duration-300 cursor-pointer overflow-hidden`}>

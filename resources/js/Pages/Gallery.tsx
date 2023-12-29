@@ -1,4 +1,4 @@
-import SwiperGallery from "@/Components/swiper/SwiperGallery"
+import SwiperGallery from "@/Components/swiper/gallery/SwiperGallery"
 import MainLayout from "@/Layouts/MainLayout"
 
 type GalleryProps = {

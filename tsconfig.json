@@ -15,6 +15,6 @@
         },
         "skipLibCheck": true
     },
-    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts", "resources/js/Components/swiper/effect-material.esm.js"],
+    "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.d.ts", "resources/js/Components/swiper/gallery/effect-material.esm.js"],
 
 }

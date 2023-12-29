@@ -57,7 +57,7 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
                 duration: .5,
                 ease: easeInOut
             }}
-            className="lg:hidden p-2 rounded-xl fixed bottom-8 bg-blue z-50"
+            className="nav lg:hidden p-2 rounded-xl fixed bottom-8 bg-blue z-50"
             ref={scope}
         >
             <ul className={`w-[0vw] h-0 flex flex-col overflow-hidden`}>

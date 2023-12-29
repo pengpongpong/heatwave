@@ -44,13 +44,13 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
                         <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                        <label htmlFor="eventName" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="date" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             Date
                         </label>
                         <input
                             type="date"
-                            name="location"
-                            id="location"
+                            name="date"
+                            id="date"
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             placeholder="Date"
                             value={data.date}
@@ -60,7 +60,7 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
                     </div>
 
                     <div>
-                        <label htmlFor="eventName" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="time" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             Time
                         </label>
                         <input
@@ -76,7 +76,7 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
                     </div>
 
                     <div>
-                        <label htmlFor="eventName" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="location" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             Location
                         </label>
                         <input

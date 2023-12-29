@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,8 @@ Route::get('/galerie', function () {
         '*[_type == "gallery"][0]{"images": images[].asset->url}'
     );
 
+
+
     return Inertia::render('Gallery', [
         'data' => $data,
         'hideNav' => false
@@ -81,6 +84,11 @@ Route::get('/kontakt', function () {
 })->name('contact');
 
 Route::post('/kontakt', [SendEmailController::class, 'index'])->name('kontakt');
+
+
+Route::get('upload', [ImageController::class, 'index'])->middleware(['auth', 'verified'])->name('upload');
+Route::post('upload', [ImageController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
+Route::post('upload', [ImageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('upload.destroy');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

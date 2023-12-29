@@ -43,7 +43,7 @@ canvas::webkit-scrollbar {
   display: none;
 }
 
-nav {
+.nav {
   background: radial-gradient(var(--purple) 70%, var(--turquoise) 150%);
 }
 
