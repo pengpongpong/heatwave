@@ -21,8 +21,10 @@ html {
 }
 
 body {
+    width: 100vw;
     background: radial-gradient(var(--turquoise) 70%, var(--purple) 110%);
     font-family: "coolvetica", sans-serif;
+    overflow-x: hidden;
 }
 
 #app {
@@ -45,6 +47,15 @@ canvas::webkit-scrollbar {
 
 .nav {
   background: radial-gradient(var(--purple) 70%, var(--turquoise) 150%);
+}
+
+dialog {
+  background: radial-gradient(var(--purple) 60%, var(--turquoise) 100%);
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+  }
 }
 
 // hamburger

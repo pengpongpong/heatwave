@@ -2,15 +2,16 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\SendEmailController;
 
 use Illuminate\Support\Facades\Session;
+
+use App\Models\Event;
+use App\Models\Gallery;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,15 +47,22 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/galerie', function () {
+    $event_list = Event::select('name')->get();
+    $image_list = Gallery::select('event', 'url')->get();
 
-    $sanityClient = app('sanity');
+    $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
 
-    $data = $sanityClient->fetch(
-        '*[_type == "gallery"][0]{"images": images[].asset->url}'
-    );
+    // encode image-url for presentation and prepend aws_path
+    foreach ($image_list as $image) {
+        $event_trimmed = str_replace(' ', '', $image->event);
+        $image['url'] = $aws_path . str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url);
+    };
+
 
     return Inertia::render('Gallery', [
-        'data' => $data,
+        // 'data' => $data,
+        "imageList" => $image_list,
+        'eventList' => $event_list,
         'hideNav' => false
     ]);
 })->name('gallery');
