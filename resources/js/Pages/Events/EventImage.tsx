@@ -4,33 +4,31 @@ import PrimaryButton from "@/Components/dashboard/PrimaryButton";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from "@/types";
 import { Head, useForm, usePage } from "@inertiajs/react";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent } from "react";
 
 type EventImageProps = {
-    error: string;
-    events: string[];
     imageList: {
-        [key: string]: string[]
-    };
-    test: any
+        event: string;
+        url: string;
+        id: string;
+    }[];
+    eventList: {
+        name: string
+    }[],
+    error?: string
 }
-const EventImage = ({ error, events, imageList, test }: PageProps<EventImageProps>) => {
+const EventImage = ({ imageList, eventList, error }: PageProps<EventImageProps>) => {
+    const { auth }: any = usePage().props;
+
     const { data, setData, post, processing, progress, reset, errors } = useForm({
-        title: "",
         event: "",
-        image: null as any
+        images: null as any
     })
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
-        post(route('upload'), { onSuccess: () => reset() });
+        post(route('gallery-upload.store'), { onSuccess: () => reset() });
     }
-
-
-    // !fix
-    const [editing, setEditing] = useState(false);
-    const { auth }: any = usePage().props;
-
 
     return (
         <AuthenticatedLayout
@@ -42,21 +40,6 @@ const EventImage = ({ error, events, imageList, test }: PageProps<EventImageProp
                 <form className="mt-8" onSubmit={onSubmit}>
                     <legend>Upload Event Image</legend>
                     <div>
-                        <label htmlFor="title " className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Title
-                        </label>
-                        <input
-                            type="text"
-                            name="title"
-                            id="title"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Title"
-                            value={data.title}
-                            onChange={e => setData("title", e.target.value)}
-                        />
-                        <InputError message={errors.title} className="mt-2" />
-                    </div>
-                    <div>
                         <label htmlFor="event" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             Event
                         </label>
@@ -64,27 +47,34 @@ const EventImage = ({ error, events, imageList, test }: PageProps<EventImageProp
                             type="text"
                             name="event"
                             id="event"
+                            list="eventList"
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             placeholder="Event"
                             value={data.event}
                             onChange={e => setData("event", e.target.value)}
                         />
+                        <datalist id="eventList">
+                            {
+                                eventList.map((event) => (<option key={event.name} value={event.name} />))
+                            }
+                        </datalist>
                         <InputError message={errors.event} className="mt-2" />
                     </div>
 
                     <div>
-                        <label htmlFor="image" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                        <label htmlFor="images" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             File
                         </label>
                         <input
                             type="file"
-                            name="image"
-                            id="image"
+                            name="images[]"
+                            id="images"
+                            multiple
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            defaultValue={data.image}
+                            defaultValue={data.images}
                             onChange={e => {
                                 if (!e.target.files) return
-                                setData('image', e.target.files[0])
+                                setData('images', e.target.files)
                             }}
                         />
 
@@ -93,7 +83,7 @@ const EventImage = ({ error, events, imageList, test }: PageProps<EventImageProp
                                 {progress.percentage}%
                             </progress>
                         )}
-                        <InputError message={errors.image} className="mt-2" />
+                        <InputError message={errors.images} className="mt-2" />
                     </div>
                     {error ? <span className="w-full mt-4 inline-block text-center text-red-600">{error}</span> : null}
                     <PrimaryButton className="mt-4" disabled={processing}>Save</PrimaryButton>
@@ -102,51 +92,54 @@ const EventImage = ({ error, events, imageList, test }: PageProps<EventImageProp
                 <div className="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
                     <ul className="mt-4">
                         {
-                            Object.keys(imageList).map((key) => (
-                                <li>
-                                    {auth.user.id === auth.user.id &&
-                                        <Dropdown>
-                                            <Dropdown.Trigger headline={auth.name}>
-                                                <button>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                    </svg>
-                                                </button>
-                                            </Dropdown.Trigger>
-                                            <Dropdown.Content>
-                                                <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
-                                                    Edit
-                                                </button>
-                                                <Dropdown.Link as="button" href={route('upload.destroy', auth.id)} method="delete">
-                                                    Delete
-                                                </Dropdown.Link>
-                                            </Dropdown.Content>
-                                        </Dropdown>
-                                    }
+                            eventList.map((event) => (
+                                <li key={event.name}>
                                     <div className="py-5">
                                         <details className="group">
                                             <summary className="flex justify-between items-center font-medium cursor-pointer list-none">
-                                                <span>{key}</span>
+                                                <span>{event.name}</span>
                                                 <span className="transition group-open:rotate-180">
-                                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
+                                                    <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
                                                     </svg>
                                                 </span>
                                             </summary>
-                                            <p className="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                            <div className="text-neutral-600 mt-3 group-open:animate-fadeIn">
                                                 <ul>
-                                                    {imageList[key].map((image) => (<li>{image}</li>))}
+                                                    {imageList.map((image) => {
+                                                        if (image.event === event.name) {
+                                                            return <li className="mb-4" key={image.url} >
+                                                                {
+                                                                    <Dropdown>
+                                                                        <Dropdown.Trigger headline={auth.name}>
+                                                                            <button>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                                                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </Dropdown.Trigger>
+                                                                        <Dropdown.Content>
+                                                                            <Dropdown.Link as="button" href={route('gallery-upload.destroy', image.id)} method="delete">
+                                                                                Delete
+                                                                            </Dropdown.Link>
+                                                                        </Dropdown.Content>
+                                                                    </Dropdown>
+                                                                }
+                                                                < img src={image.url} width={200} />
+                                                            </li>
+                                                        }
+                                                    })}
                                                 </ul>
-                                            </p>
+                                            </div>
                                         </details>
                                     </div>
                                 </li>
                             ))
                         }
                     </ul>
-                </div>
+                </div >
 
-            </main>
-        </AuthenticatedLayout>
+            </main >
+        </AuthenticatedLayout >
     )
 }
 

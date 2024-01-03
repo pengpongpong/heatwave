@@ -187,7 +187,10 @@ return [
 
     'allowed_email' => env('ALLOWED_EMAIL'),
 
-    'sanity_project_id' => env('SANTIY_PROJECTID'),
+    'sanity_project_id' => env('SANITY_PROJECT_ID'),
     'sanity_dataset' => env('SANITY_DATASET'),
     'sanity_api' => env('SANITY_API'),
+
+    'aws_bucket' => env('AWS_BUCKET'),
+    'aws_region' => env('AWS_DEFAULT_REGION'),
 ];

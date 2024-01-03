@@ -1,5 +1,5 @@
 import MainLayout from "@/Layouts/MainLayout"
-import EventSwiper from "@/Components/event-swiper/EventSwiper"
+import EventSwiper from "@/Components/swiper/event-swiper/EventSwiper"
 
 
 const Events = () => {

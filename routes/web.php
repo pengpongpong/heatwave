@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -52,8 +53,6 @@ Route::get('/galerie', function () {
         '*[_type == "gallery"][0]{"images": images[].asset->url}'
     );
 
-
-
     return Inertia::render('Gallery', [
         'data' => $data,
         'hideNav' => false
@@ -85,10 +84,9 @@ Route::get('/kontakt', function () {
 
 Route::post('/kontakt', [SendEmailController::class, 'index'])->name('kontakt');
 
-
-Route::get('upload', [ImageController::class, 'index'])->middleware(['auth', 'verified'])->name('upload');
-Route::post('upload', [ImageController::class, 'store'])->middleware(['auth', 'verified'])->name('upload');
-Route::post('upload', [ImageController::class, 'destroy'])->middleware(['auth', 'verified'])->name('upload.destroy');
+Route::resource('gallery-upload', GalleryController::class)
+    ->only(['index', 'store', 'destroy'])
+    ->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

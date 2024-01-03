@@ -37,7 +37,7 @@ class EventController extends Controller
     {
         $validated = $request->validated();
     
-        $request->user()->event()->create($validated);
+        $request->user()->events()->create($validated);
 
         return redirect(route('events.index'));
     }
