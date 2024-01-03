@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->noActionOnDelete();
             $table->string('event');
+            $table->foreignId('event_id')->constrained()->noActionOnDelete();
             $table->string('url');
             $table->timestamps();
         });

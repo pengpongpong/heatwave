@@ -5,10 +5,12 @@ type GalleryProps = {
   hideNav: boolean,
   imageList: {
     event: string;
+    event_id: string;
     url: string;
   }[];
   eventList: {
-    name: string
+    name: string;
+    id: string;
   }[],
 }
 
@@ -22,9 +24,9 @@ const Gallery = ({ hideNav, imageList, eventList }: GalleryProps) => {
         <ul>
           {
             eventList.map((event) => {
-              return <li className="mb-8" key={event.name}>
+              return <li className="mb-8" key={event.id}>
                 <h2 className="text-2xl text-center underline">{event.name}</h2>
-                <SwiperGallery data={imageList.filter((images) => (images.event === event.name))} />
+                <SwiperGallery data={imageList.filter((images) => (images.event_id === event.id))} />
               </li>
             })
           }

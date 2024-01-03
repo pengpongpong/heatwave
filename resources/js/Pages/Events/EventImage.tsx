@@ -4,7 +4,7 @@ import PrimaryButton from "@/Components/dashboard/PrimaryButton";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from "@/types";
 import { Head, useForm, usePage } from "@inertiajs/react";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 type EventImageProps = {
     imageList: {
@@ -13,7 +13,8 @@ type EventImageProps = {
         id: string;
     }[];
     eventList: {
-        name: string
+        name: string,
+        id: number
     }[],
     error?: string
 }
@@ -22,6 +23,7 @@ const EventImage = ({ imageList, eventList, error }: PageProps<EventImageProps>)
 
     const { data, setData, post, processing, progress, reset, errors } = useForm({
         event: "",
+        eventId: 0,
         images: null as any
     })
 
@@ -29,6 +31,15 @@ const EventImage = ({ imageList, eventList, error }: PageProps<EventImageProps>)
         e.preventDefault();
         post(route('gallery-upload.store'), { onSuccess: () => reset() });
     }
+
+    // set event id on event name input
+    useEffect(() => {
+        const currentId = eventList.filter((event) => (event.name === data.event))
+
+        if (currentId.length) {
+            setData('eventId', currentId[0].id)
+        }
+    }, [data.event])
 
     return (
         <AuthenticatedLayout
@@ -51,7 +62,7 @@ const EventImage = ({ imageList, eventList, error }: PageProps<EventImageProps>)
                             className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                             placeholder="Event"
                             value={data.event}
-                            onChange={e => setData("event", e.target.value)}
+                            onChange={e => { setData("event", e.target.value) }}
                         />
                         <datalist id="eventList">
                             {

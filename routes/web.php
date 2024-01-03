@@ -47,8 +47,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/galerie', function () {
-    $event_list = Event::select('name')->get();
-    $image_list = Gallery::select('event', 'url')->get();
+    $event_list = Event::select('name', 'id')->get();
+    $image_list = Gallery::select('event', 'event_id', 'url')->get();
 
     $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
 
@@ -57,7 +57,6 @@ Route::get('/galerie', function () {
         $event_trimmed = str_replace(' ', '', $image->event);
         $image['url'] = $aws_path . str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url);
     };
-
 
     return Inertia::render('Gallery', [
         // 'data' => $data,

@@ -8,26 +8,27 @@ import './index.scss';
 
 type SwiperGalleryProps = {
     data: {
-        event: string,
+        event: string;
         url: string
     }[],
 }
 
 type SwiperElProps = {
     className?: {
-        container?: string,
+        container?: string;
         swiper?: string
     },
     onClick?: () => void;
 } & SwiperGalleryProps;
 
 type SwiperSlideProps = {
-    image: string,
+    imageUrl: string;
+    event: string;
     onClick?: () => void;
 }
 
 // swiper slide
-const SwiperSlide = ({ image, onClick }: SwiperSlideProps) => {
+const SwiperSlide = ({ imageUrl, event, onClick }: SwiperSlideProps) => {
     return (
         <div className="swiper-slide min-w-fit" onClick={onClick}>
             <div className="swiper-material-wrapper">
@@ -38,8 +39,8 @@ const SwiperSlide = ({ image, onClick }: SwiperSlideProps) => {
                         data-swiper-material-scale="1"
                         width={428}
                         height={626}
-                        src={image}
-                        alt="Heatwave party"
+                        src={imageUrl}
+                        alt={event}
                     />
                 </div>
             </div>
@@ -80,8 +81,8 @@ const SwiperEl = ({ data, className, onClick }: SwiperElProps) => {
         <div className={`swiper-container w-screen h-full ${className?.container}`}>
             <div className={`swiper mt-8 ${className?.swiper}`}>
                 <div className="swiper-wrapper">
-                    {data.map((img, index) => (
-                        <SwiperSlide image={img.url} key={img.url} onClick={onClick}/>
+                    {data.map((event) => (
+                        <SwiperSlide imageUrl={event.url} event={event.event} key={event.url} onClick={onClick}/>
                     ))}
                 </div>
             </div>

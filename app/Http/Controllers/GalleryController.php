@@ -16,7 +16,7 @@ class GalleryController extends Controller
     public function index()
     {
         // get events from database for input selection and image urls
-        $event_list = Event::select('name')->get();
+        $event_list = Event::select('name', 'id')->get();
         $image_list = Gallery::select('event', 'url', 'id')->get();
 
         $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
@@ -36,12 +36,15 @@ class GalleryController extends Controller
         ]);
     }
 
+
+    // store images
     public function store(Request $request): RedirectResponse
     {
         $dataToInsert = [];
 
         $validated = $request->validate([
             'event' => 'required|string',
+            'eventId' => 'required|integer',
             'images' => 'required',
             'images.*' => 'mimes:webp|max:2048'
         ]);
@@ -60,7 +63,8 @@ class GalleryController extends Controller
             // prepare data for database
             $dataToInsert[] = [
                 'user_id' => auth()->id(),
-                'event' => $request->event,
+                'event' => $validated['event'],
+                'event_id' => $validated['eventId'],
                 'url' => $path,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -74,6 +78,7 @@ class GalleryController extends Controller
     }
 
 
+    // delete images
     public function destroy(Gallery $gallery_upload): RedirectResponse
     {
         $this->authorize('delete', $gallery_upload);
