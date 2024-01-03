@@ -18,7 +18,7 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        post(route('events.store'), { onSuccess: () => reset() });
+        post(route('event-upload.store'), { onSuccess: () => reset() });
     };
 
     return (

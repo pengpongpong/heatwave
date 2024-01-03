@@ -39,7 +39,7 @@ class EventController extends Controller
     
         $request->user()->events()->create($validated);
 
-        return redirect(route('events.index'));
+        return redirect(route('event-upload.index'));
     }
 
     /**
@@ -72,7 +72,7 @@ class EventController extends Controller
 
         $event->update($validated);
 
-        return redirect(route('events.index'));
+        return redirect(route('event-upload.index'));
     }
 
     /**
@@ -84,6 +84,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect(route('events.index'));
+        return redirect(route('event-upload.index'));
     }
 }

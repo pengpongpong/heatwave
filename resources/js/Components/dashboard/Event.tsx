@@ -28,7 +28,7 @@ export default function Event({ event }: { event: EventProps }) {
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        patch(route('events.update', event.id), { onSuccess: () => setEditing(false) });
+        patch(route('event-upload.update', event.id), { onSuccess: () => setEditing(false) });
     };
 
     return (
@@ -46,7 +46,7 @@ export default function Event({ event }: { event: EventProps }) {
                         <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
                             Edit
                         </button>
-                        <Dropdown.Link as="button" href={route('events.destroy', event.id)} method="delete">
+                        <Dropdown.Link as="button" href={route('event-upload.destroy', event.id)} method="delete">
                             Delete
                         </Dropdown.Link>
                     </Dropdown.Content>
