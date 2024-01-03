@@ -43,34 +43,15 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Event $event)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Event $event)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event) : RedirectResponse
+    public function update(StoreEventRequest $request, Event $event_upload) : RedirectResponse
     {
+        $this->authorize('update', $event_upload);
 
-        $this->authorize('update', $event);
+        $validated = $request->validated();
 
-        $validated = $request->validate([
-            'description' => 'required|string'
-        ]);
-
-        $event->update($validated);
+        $event_upload->update($validated);
 
         return redirect(route('event-upload.index'));
     }
@@ -78,11 +59,11 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event): RedirectResponse
+    public function destroy(Event $event_upload): RedirectResponse
     {
-        $this->authorize('delete', $event);
+        $this->authorize('delete', $event_upload);
 
-        $event->delete();
+        $event_upload->delete();
 
         return redirect(route('event-upload.index'));
     }

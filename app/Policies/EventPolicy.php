@@ -35,17 +35,17 @@ class EventPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Event $event): bool
+    public function update(User $user, Event $event_upload): bool
     {
-        return $event->user()->is($user);
+        return $event_upload->user()->is($user);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Event $event): bool
+    public function delete(User $user, Event $event_upload): bool
     {
-        return $this->update($user, $event);
+        return $this->update($user, $event_upload);
     }
 
     /**
