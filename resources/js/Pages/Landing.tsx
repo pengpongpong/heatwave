@@ -3,13 +3,14 @@ import { urlFor } from "@/utils/utils";
 
 import Intro from "@/Components/threejs/Intro";
 import MainLayout from "@/Layouts/MainLayout";
+import PhoneContainer from "@/Components/phone/PhoneContainer";
 
 type LandingData = {
-    firstPortrait: string
+    // firstPortrait: string
     firstLandscape: string
     secondPortrait: string
     secondLandscape: string
-
+    videoUrl: string
 }
 
 type LandingProps = {
@@ -27,9 +28,10 @@ export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
                 <main className="m-4 lg:m-12" id="main">
                     <h1 className="my-8 text-4xl text-center">Heatwave</h1>
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
-                        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                            <img src={urlFor(data.firstPortrait).size(1847, 2309).getUrl()} width={600} className="lg:col-span-2 w-full h-full object-cover" />
-                            <img src={urlFor(data.firstLandscape).size(2920, 2336).getUrl()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <PhoneContainer />
+                            {/* <img src={urlFor(data.firstPortrait).size(1847, 2309).getUrl()} width={600} className="lg:col-span-2 w-full h-full object-cover" /> */}
+                            <img src={urlFor(data.firstLandscape).size(2920, 2336).getUrl()} width={1000} className="lg:col-span-2 w-full h-full object-cover" />
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
                             <img src={urlFor(data.secondLandscape).size(2920, 2336).getUrl()} width={1000} className="lg:col-span-3 w-full h-full object-cover" />
