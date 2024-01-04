@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('name', 256);
             $table->date('date');
             $table->time('time')->default('00:00');
-            $table->string('location', 256);
-            $table->text('description');
+            $table->string('location', 256)->default('');
+            $table->string('artist')->default('');
+            $table->string('cover_url')->default('');
+            $table->text('description')->default('');
             $table->timestamps();
         });
     }

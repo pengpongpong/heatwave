@@ -45,7 +45,7 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
                     </Link>
                     <ul className={`flex gap-4 overflow-hidden`}>
                         <NavLink href={route("gallery")} active={route().current("gallery")} >Galerie</NavLink>
-                        <NavLink href={route("event")} active={route().current("event")} >Events</NavLink>
+                        <NavLink href={route("events")} active={route().current("events")} >Events</NavLink>
                         <NavLink href={route("about")} active={route().current("about")} >Über uns</NavLink>
                         <NavLink href={route("theCrew")} active={route().current("theCrew")} >Die Crew</NavLink>
                     <NavLink href={route("contact")} active={route().current("contact")} >Kontakt</NavLink>

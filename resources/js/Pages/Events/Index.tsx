@@ -13,6 +13,8 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
         date: "",
         time: "",
         location: "",
+        artist: "",
+        cover_url: null as any,
         description: "",
     });
 
@@ -27,7 +29,7 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
 
             <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
                 <form onSubmit={submit}>
-                    <legend>Create new Event</legend>
+                    <legend className="text-center text-xl">Create new Event</legend>
                     <div>
                         <label htmlFor="eventName" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
                             Event Name
@@ -89,6 +91,40 @@ export default function Index({ auth, events }: PageProps & { events: EventProps
                             onChange={e => setData("location", e.target.value)}
                         />
                         <InputError message={errors.location} className="mt-2" />
+                    </div>
+
+                    <div>
+                        <label htmlFor="location" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                            Artist
+                        </label>
+                        <input
+                            type="text"
+                            name="artist"
+                            id="artist"
+                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            placeholder="Artist"
+                            value={data.artist}
+                            onChange={e => setData("artist", e.target.value)}
+                        />
+                        <InputError message={errors.artist} className="mt-2" />
+                    </div>
+                    <div>
+                        <label htmlFor="location" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                            Cover Image
+                        </label>
+                        <input
+                            type="file"
+                            name="cover_url"
+                            id="cover_url"
+                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            placeholder="Cover Image"
+                            defaultValue={data.cover_url}
+                            onChange={e => {
+                                if (!e.target.files) return
+                                setData('cover_url', e.target.files[0])
+                            }}
+                        />
+                        <InputError message={errors.cover_url} className="mt-2" />
                     </div>
 
 

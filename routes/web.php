@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Event;
 use App\Models\Gallery;
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +39,8 @@ Route::get('/', function () {
             "secondPortrait": images.secondPortrait.asset->url,
         }'
     );
+
+    $data['videoUrl'] = "";
 
     return Inertia::render('Landing', [
         // 'canLogin' => Route::has('login'),
@@ -70,9 +74,23 @@ Route::get('/ueber-uns', function () {
     return Inertia::render('About', []);
 })->name('about');
 
-Route::get('/event', function () {
-    return Inertia::render('Events', []);
-})->name('event');
+Route::get('/events', function () {
+    $events = Event::orderBy('date', 'desc')->get();
+
+    $events->transform(function ($event) {
+        $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
+
+        $event->date = Carbon::parse($event->date)->format('d/m/Y');
+        $event->time = Carbon::parse($event->time)->format('H:i');
+        $event->cover_url = $aws_path . $event['cover_url'];
+
+        return $event;
+    });
+
+    return Inertia::render('Events', [
+        'events' => $events
+    ]);
+})->name('events');
 
 Route::get('/crew', function () {
     return Inertia::render('TheCrew', []);
@@ -100,8 +118,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('event-upload', EventController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
+    ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+// put, patch not working with file uploads -> only post
+Route::post('event-upload/{event_upload}', [EventController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('event-upload.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

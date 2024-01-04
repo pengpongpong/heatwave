@@ -25,7 +25,7 @@ const About = (props: Props) => {
                     </li>
                     <li className="mb-2">
                         <Link
-                            href={route("event")}
+                            href={route("events")}
                         >
                             <img className="inline mr-2" src="/bx-calendar-event.svg" width={25} alt="Events" />
                             Events

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Dropdown from '@/Components/dashboard/Dropdown';
 import InputError from '@/Components/dashboard/InputError';
 import PrimaryButton from '@/Components/dashboard/PrimaryButton';
@@ -21,17 +21,20 @@ export default function Event({ event }: { event: EventProps }) {
 
     const [editing, setEditing] = useState(false);
 
-    const { data, setData, patch, clearErrors, reset, errors } = useForm({
+    const { data, setData, patch, post, put, clearErrors, reset, errors, hasErrors } = useForm({
         name: event.name,
         date: `${event.date}`,
         time: event.time,
         location: event.location,
+        artist: event.artist,
+        cover_url: null as any,
         description: event.description,
     });
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        patch(route('event-upload.update', event.id), { onSuccess: () => setEditing(false) });
+
+        post(route('event-upload.update', event.id), { onSuccess: () => setEditing(false) });
     };
 
     return (
@@ -71,6 +74,8 @@ export default function Event({ event }: { event: EventProps }) {
                 </div>
             </div>
 
+            <p className="text-gray-800">Artist: {event.artist}</p>
+            <img src={event.cover_url} width={150} />
             <div>
                 <span className="text-gray-800">{event.user.name}</span>
                 <small className="ml-2 text-sm text-gray-600">{new Date(event.updated_at).toLocaleString("de-AT")}</small>
@@ -143,6 +148,39 @@ export default function Event({ event }: { event: EventProps }) {
                             onChange={e => setData("location", e.target.value)}
                         />
                         <InputError message={errors.location} className="mt-2" />
+                    </div>
+
+                    <div>
+                        <label htmlFor="artist" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                            Artist
+                        </label>
+                        <input
+                            type="text"
+                            name="artist"
+                            id="artist"
+                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            placeholder="Artist"
+                            value={data.artist}
+                            onChange={e => setData("artist", e.target.value)}
+                        />
+                        <InputError message={errors.artist} className="mt-2" />
+                    </div>
+                    <div>
+                        <label htmlFor="cover_url" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
+                            Cover Image
+                        </label>
+                        <input
+                            type="file"
+                            name="cover_url"
+                            id="cover_url"
+                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            placeholder="Cover Image"
+                            onChange={e => {
+                                if (!e.target.files) return
+                                setData('cover_url', e.target.files[0])
+                            }}
+                        />
+                        <InputError message={errors.cover_url} className="mt-2" />
                     </div>
 
                     <textarea

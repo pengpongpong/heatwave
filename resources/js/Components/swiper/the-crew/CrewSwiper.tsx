@@ -42,7 +42,7 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
                 </li>
                 <li className="mb-2">
                   <a
-                    href={route("event")}
+                    href={route("events")}
                     className="flex gap-2"
                   >
                     <img src="/bxs-hand-right.svg" width={25} alt="Events" />

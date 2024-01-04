@@ -62,7 +62,7 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
         >
             <ul className={`w-[0vw] h-0 flex flex-col overflow-hidden`}>
                 <NavLinkMobile href={route("gallery")} active={route().current("gallery")}>Galerie</NavLinkMobile>
-                <NavLinkMobile href={route("event")} active={route().current("event")}>Events</NavLinkMobile>
+                <NavLinkMobile href={route("events")} active={route().current("events")}>Events</NavLinkMobile>
                 <NavLinkMobile href={route("about")} active={route().current("about")}>Über uns</NavLinkMobile>
                 <NavLinkMobile href={route("theCrew")} active={route().current("theCrew")}>Die Crew</NavLinkMobile>
                 <NavLinkMobile href={route("contact")} active={route().current("contact")} className="mb-8">Kontakt</NavLinkMobile>

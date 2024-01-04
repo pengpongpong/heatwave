@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import createExpandingCollection from './expanding-collection';
 import './expanding-collection.scss';
 import './event-swiper.scss';
+import { EventProps } from "@/types";
 
 type EventSwiperSlideProps = {
     title: string;
@@ -36,49 +37,14 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl }: Ev
 
                 {/* Expanding collection cover */}
                 <div className="expanding-collection-cover">
-                    <img src={imageUrl} />
+                    <img src={imageUrl} width={500} height={500}/>
                 </div>
             </div>
         </div>
     )
 }
 
-const eventData = [
-    {
-        title: "Heatwave #4",
-        location: "Schrille Grille",
-        date: "01/10/23",
-        time: "19:00",
-        artists: "DJ Raifu, Cloud.G",
-        imageUrl: "/heatwave_event4.jpeg"
-    },
-    {
-        title: "Heatwave #3",
-        location: "PPC",
-        date: "01/10/23",
-        time: "19:00",
-        artists: "DJ Raifu, Tori",
-        imageUrl: "/heatwave_event3.jpeg"
-    },
-    {
-        title: "Heatwave #2",
-        location: "Schrille Grille",
-        date: "01/10/23",
-        time: "19:00",
-        artists: "DJ Raifu, Noah Trembley, Vienca",
-        imageUrl: "/heatwave_event2.jpeg"
-    },
-    {
-        title: "Heatwave #1",
-        location: "Schrille Grille",
-        date: "01/10/23",
-        time: "19:00",
-        artists: "DJ Raifu, Noah Trembley",
-        imageUrl: "/heatwave_event1.jpeg"
-    },
-]
-
-const EventSwiper = () => {
+const EventSwiper = ({ events }: { events: EventProps[] }) => {
     useEffect(() => {
         const sliderEl = document.querySelector('.expanding-collection');
 
@@ -90,15 +56,15 @@ const EventSwiper = () => {
             <div className="expanding-collection">
                 <div className="swiper">
                     <div className="swiper-wrapper">
-                        {eventData.map((event) => (
+                        {events.map((event) => (
                             <EventSwiperSlide
-                                title={event.title}
+                                title={event.name}
                                 location={event.location}
                                 time={event.time}
-                                date={event.date}
-                                artists={event.artists}
-                                imageUrl={event.imageUrl}
-                                key={event.title}
+                                date={`${event.date}`}
+                                artists={event.artist}
+                                imageUrl={event.cover_url}
+                                key={event.id}
                             />
                         ))}
                     </div>

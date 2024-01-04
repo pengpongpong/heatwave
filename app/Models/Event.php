@@ -15,6 +15,8 @@ class Event extends Model
         'date',
         'time',
         'location',
+        'artist',
+        'cover_url',
         'description',
     ];
 

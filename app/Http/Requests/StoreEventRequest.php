@@ -26,6 +26,8 @@ class StoreEventRequest extends FormRequest
             'date' => 'required|date',
             'time' => 'required|string',
             'location' => 'required|string|max:256',
+            'artist' => 'required|string|max:256',
+            'cover_url' => 'required|mimes:webp|max:2048',
             'description' => 'required|string',
         ];
     }
