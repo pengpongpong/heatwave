@@ -17,7 +17,7 @@
 }
 
 html {
-    background: black;
+    background: var(--turquoise);
 }
 
 body {
@@ -25,6 +25,22 @@ body {
     background: radial-gradient(var(--turquoise) 70%, var(--purple) 110%);
     font-family: "coolvetica", sans-serif;
     overflow-x: hidden;
+}
+
+/* scroll-bar */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: radial-gradient(var(--turquoise) 5%, var(--purple) 140%);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: radial-gradient(var(--turquoise) 10%, var(--purple) 100%);
+  border-radius: 14px;
+  border: 1px solid var(--purple);
 }
 
 #app {
@@ -58,7 +74,7 @@ dialog::backdrop {
   backdrop-filter: blur(2px);
 }
 
-// hamburger
+/* hamburger */
 .hamburger {
     cursor: pointer;
   }
