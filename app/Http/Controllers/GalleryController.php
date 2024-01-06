@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Gallery;
 use App\Models\Event;
 use Illuminate\Support\Facades\Session;
@@ -18,18 +19,17 @@ class GalleryController extends Controller
         // get events from database for input selection and image urls
         $event_list = Event::select('name', 'id')->get();
         $image_list = Gallery::select('event', 'url', 'id')->get();
-
-        $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
-
         $error = Session::get('error');
 
         // encode image-url for presentation and prepend aws_path
-        foreach ($image_list as $image) {
+        $image_list->transform(function ($image) {
             $event_trimmed = str_replace(' ', '', $image->event);
-            $image['url'] = $aws_path . str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url);
-        };
+            $image['url'] = Helper::awsPath(str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url));
 
-        return Inertia::render('Events/EventImage', [
+            return $image;
+        });
+
+        return Inertia::render('Upload/GalleryUpload', [
             "imageList" => $image_list,
             'eventList' => $event_list,
             'error' => $error

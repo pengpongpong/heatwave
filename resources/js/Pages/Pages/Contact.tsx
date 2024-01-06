@@ -1,6 +1,6 @@
-import InputError from "@/Components/dashboard/InputError";
-import InputLabel from "@/Components/dashboard/InputLabel";
-import TextInput from "@/Components/dashboard/TextInput";
+import InputError from "@/Components/common/InputError";
+import InputLabel from "@/Components/common/InputLabel";
+import TextInput from "@/Components/common/TextInput";
 import MainLayout from "@/Layouts/MainLayout"
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useEffect } from "react";

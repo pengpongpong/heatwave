@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,14 +19,15 @@ class EventController extends Controller
      */
     public function index(): Response
     {
-        $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
         $events = Event::with('user:id,name')->orderBy('date', 'desc')->get();
 
-        foreach ($events as $event) {
-            $event['cover_url'] = $aws_path . $event['cover_url'];
-        };
+        $events->transform(function ($event) {
+            $event['cover_url'] = Helper::awsPath($event['cover_url']);
 
-        return Inertia::render('Events/Index', [
+            return $event;
+        });
+
+        return Inertia::render('Upload/EventUpload', [
             "events" => $events
         ]);
     }

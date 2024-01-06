@@ -3,7 +3,7 @@ import MainLayout from "@/Layouts/MainLayout"
 import CrewSwiper from "@/Components/swiper/the-crew/CrewSwiper"
 
 
-const TheCrew2 = () => {
+const TheCrew = () => {
     return (
         <MainLayout
             title="The Crew"
@@ -14,4 +14,4 @@ const TheCrew2 = () => {
     )
 }
 
-export default TheCrew2
+export default TheCrew

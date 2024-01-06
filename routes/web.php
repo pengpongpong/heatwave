@@ -3,29 +3,22 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-
 use App\Http\Controllers\SendEmailController;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+
+use Inertia\Inertia;
+
+use App\Helpers\Helper;
 
 use App\Models\Event;
 use App\Models\Gallery;
 
 use Carbon\Carbon;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
+/**  HOME **/
 Route::get('/', function () {
 
     $sanityClient = app('sanity');
@@ -42,81 +35,89 @@ Route::get('/', function () {
 
     $data['videoUrl'] = "";
 
-    return Inertia::render('Landing', [
-        // 'canLogin' => Route::has('login'),
-        // 'canRegister' => Route::has('register'),
+    return Inertia::render('Pages/Landing', [
         'data' => $data,
         'hideNav' => true
     ]);
 })->name('home');
 
+
+/**  GALLERY **/
 Route::get('/galerie', function () {
     $event_list = Event::select('name', 'id')->get();
     $image_list = Gallery::select('event', 'event_id', 'url')->get();
 
-    $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
-
-    // encode image-url for presentation and prepend aws_path
-    foreach ($image_list as $image) {
+    $image_list->transform(function ($image) {
+        // get event name and remove whitespace
         $event_trimmed = str_replace(' ', '', $image->event);
-        $image['url'] = $aws_path . str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url);
-    };
 
-    return Inertia::render('Gallery', [
-        // 'data' => $data,
+        // encode image-url for presentation and prepend aws_path
+        $image['url'] = Helper::awsPath(str_replace($event_trimmed, rawurlencode($event_trimmed), $image->url));
+
+        return $image;
+    });
+
+    return Inertia::render('Pages/Gallery', [
         "imageList" => $image_list,
         'eventList' => $event_list,
         'hideNav' => false
     ]);
 })->name('gallery');
 
-Route::get('/ueber-uns', function () {
-    return Inertia::render('About', []);
-})->name('about');
 
+/** EVENTS **/
 Route::get('/events', function () {
     $events = Event::orderBy('date', 'desc')->get();
 
     $events->transform(function ($event) {
-        $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/';
-
-        $event->date = Carbon::parse($event->date)->format('d/m/Y');
-        $event->time = Carbon::parse($event->time)->format('H:i');
-        $event->cover_url = $aws_path . $event['cover_url'];
+        $event['date'] = Carbon::parse($event->date)->format('d/m/Y');
+        $event['time'] = Carbon::parse($event->time)->format('H:i');
+        $event['cover_url'] = Helper::awsPath($event['cover_url']);
 
         return $event;
     });
 
-    return Inertia::render('Events', [
+    return Inertia::render('Pages/Events', [
         'events' => $events
     ]);
 })->name('events');
 
+
+/**  ABOUT US **/
+Route::get('/ueber-uns', function () {
+    return Inertia::render('Pages/About', []);
+})->name('about');
+
+
+/** THE CREW **/
 Route::get('/crew', function () {
-    return Inertia::render('TheCrew', []);
+    return Inertia::render('Pages/TheCrew', []);
 })->name('theCrew');
 
-Route::get('/kontakt', function () {
 
+/** CONTACT **/
+Route::get('/kontakt', function () {
     $error = Session::get('error');
     $success = Session::get('success');
 
-    return Inertia::render('Contact', [
+    return Inertia::render('Pages/Contact', [
         'error' => $error,
         'success' => $success
     ]);
 })->name('contact');
 
-Route::post('/kontakt', [SendEmailController::class, 'index'])->name('kontakt');
+/** CONTACT FORM **/
+Route::post('/kontakt', [SendEmailController::class, 'index'])
+    ->name('kontakt');
 
+
+/** GALLERY UPLOAD **/
 Route::resource('gallery-upload', GalleryController::class)
     ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+/** EVENT UPLOAD **/
 Route::resource('event-upload', EventController::class)
     ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
@@ -126,6 +127,15 @@ Route::post('event-upload/{event_upload}', [EventController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('event-upload.update');
 
+
+/** DASHBOARD **/
+Route::get('/dashboard', function () {
+    return Inertia::render('Pages/Dashboard');
+})->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+
+/** PROFILE **/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

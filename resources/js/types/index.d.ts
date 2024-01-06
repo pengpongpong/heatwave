@@ -11,7 +11,6 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     };
 };
 
-
 export type EventProps = {
     id: number;
     user_id: number;

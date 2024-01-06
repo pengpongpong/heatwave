@@ -1,5 +1,5 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/dashboard/PrimaryButton';
+import PrimaryButton from '@/Components/common/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 

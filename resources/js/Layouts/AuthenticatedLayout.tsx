@@ -1,9 +1,10 @@
 import { useState, PropsWithChildren, ReactNode } from 'react';
-import ApplicationLogo from '@/Components/dashboard/ApplicationLogo';
-import Dropdown from '@/Components/dashboard/Dropdown';
-import NavLink from '@/Components/dashboard/NavLink';
-import ResponsiveNavLink from '@/Components/dashboard/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
+
+import ApplicationLogo from '@/Components/common/ApplicationLogo';
+import Dropdown from '@/Components/common/Dropdown';
+import NavLink from '@/Components/common/NavLink';
+import ResponsiveNavLink from '@/Components/common/ResponsiveNavLink';
 import { User } from '@/types';
 
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
@@ -24,6 +25,12 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
+                                </NavLink>
+                                <NavLink href={route('event-upload.index')} active={route().current('event-upload.index')}>
+                                    Event Upload
+                                </NavLink>
+                                <NavLink href={route('gallery-upload.index')} active={route().current('gallery-upload.index')}>
+                                    Gallery Upload
                                 </NavLink>
                             </div>
                         </div>

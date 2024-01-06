@@ -1,9 +1,12 @@
 import { FormEvent, useState } from 'react';
-import Dropdown from '@/Components/dashboard/Dropdown';
-import InputError from '@/Components/dashboard/InputError';
-import PrimaryButton from '@/Components/dashboard/PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
 
+import Dropdown from '@/Components/common/Dropdown';
+import InputError from '@/Components/common/InputError';
+import PrimaryButton from '@/Components/common/PrimaryButton';
+import InputLabel from "@/Components/common/InputLabel";
+import TextInput from "@/Components/common/TextInput";
+import TextArea from "@/Components/common/TextArea";
 import { EventProps, PageProps } from "@/types";
 
 const eventDate = (date: Date) => {
@@ -15,13 +18,13 @@ const eventDate = (date: Date) => {
     })
 }
 
-export default function Event({ event }: { event: EventProps }) {
+export default function EventItem({ event }: { event: EventProps }) {
     //! fix any
     const { auth }: PageProps<any> = usePage().props;
 
     const [editing, setEditing] = useState(false);
 
-    const { data, setData, patch, post, put, clearErrors, reset, errors, hasErrors } = useForm({
+    const { data, setData, post, clearErrors, reset, processing, errors } = useForm({
         name: event.name,
         date: `${event.date}`,
         time: event.time,
@@ -86,95 +89,82 @@ export default function Event({ event }: { event: EventProps }) {
             {editing
                 ? <form onSubmit={submit}>
 
-                    <div>
-                        <label htmlFor="eventName" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Event Name
-                        </label>
-                        <input
-                            type="text"
-                            name="eventName"
+                    <div className="my-4">
+                        <InputLabel htmlFor="eventName" value="Event Name" />
+
+                        <TextInput
                             id="eventName"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Event Name"
+                            name="eventName"
                             value={data.name}
-                            onChange={e => setData("name", e.target.value)}
+                            className="mt-1 p-2 block w-full"
+                            onChange={(e) => setData('name', e.target.value)}
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
 
-                    <div>
-                        <label htmlFor="date" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Date
-                        </label>
-                        <input
+                    <div className="mb-4">
+                        <InputLabel htmlFor="date" value="Date" />
+
+                        <TextInput
                             type="date"
-                            name="date"
                             id="date"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Date"
+                            name="date"
                             value={data.date}
-                            onChange={e => setData("date", e.target.value)}
+                            className="mt-1 p-2 block w-full"
+                            onChange={(e) => setData('date', e.target.value)}
                         />
                         <InputError message={errors.date} className="mt-2" />
                     </div>
 
-                    <div>
-                        <label htmlFor="time" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Time
-                        </label>
-                        <input
+                    <div className="mb-4">
+                        <InputLabel htmlFor="time" value="Time" />
+
+                        <TextInput
                             type="time"
-                            name="time"
                             id="time"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Time"
+                            name="time"
                             value={data.time}
-                            onChange={e => setData("time", e.target.value)}
+                            className="mt-1 p-2 block w-full"
+                            onChange={(e) => setData('time', e.target.value)}
                         />
                         <InputError message={errors.time} className="mt-2" />
                     </div>
 
-                    <div>
-                        <label htmlFor="location" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Location
-                        </label>
-                        <input
-                            type="text"
-                            name="location"
+                    <div className="mb-4">
+                        <InputLabel htmlFor="location" value="Location" />
+
+                        <TextInput
                             id="location"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Location"
+                            name="location"
                             value={data.location}
-                            onChange={e => setData("location", e.target.value)}
+                            className="mt-1 p-2 block w-full"
+                            onChange={(e) => setData('location', e.target.value)}
                         />
                         <InputError message={errors.location} className="mt-2" />
                     </div>
 
-                    <div>
-                        <label htmlFor="artist" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Artist
-                        </label>
-                        <input
-                            type="text"
-                            name="artist"
+                    <div className="mb-4">
+                        <InputLabel htmlFor="artist" value="Artist" />
+
+                        <TextInput
                             id="artist"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Artist"
+                            name="artist"
                             value={data.artist}
-                            onChange={e => setData("artist", e.target.value)}
+                            className="mt-1 p-2 block w-full"
+                            onChange={(e) => setData('artist', e.target.value)}
                         />
                         <InputError message={errors.artist} className="mt-2" />
                     </div>
-                    <div>
-                        <label htmlFor="cover_url" className="block mb-2 mt-4 text-sm font-medium leading-6 text-gray-900">
-                            Cover Image
-                        </label>
-                        <input
+
+                    <div className="mb-4">
+                        <InputLabel htmlFor="cover_url" value="Cover Image" />
+
+                        <TextInput
                             type="file"
-                            name="cover_url"
                             id="cover_url"
-                            className="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                            placeholder="Cover Image"
+                            name="cover_url"
+                            defaultValue={data.cover_url}
+                            className="mt-1 p-2 block w-full"
                             onChange={e => {
                                 if (!e.target.files) return
                                 setData('cover_url', e.target.files[0])
@@ -183,15 +173,21 @@ export default function Event({ event }: { event: EventProps }) {
                         <InputError message={errors.cover_url} className="mt-2" />
                     </div>
 
-                    <textarea
-                        value={data.description}
-                        onChange={e => setData('description', e.target.value)}
-                        className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
-                    <InputError
-                        message={errors.description}
-                        className="mt-2" />
+
+                    <div className="mb-4">
+                        <InputLabel htmlFor="description" value="Description" />
+
+                        <TextArea
+                            value={data.description}
+                            name="description"
+                            placeholder="Description"
+                            onChange={e => setData('description', e.target.value)}
+                        />
+                        <InputError message={errors.description} className="mt-2" />
+                    </div>
+
                     <div className="space-x-2">
-                        <PrimaryButton className="mt-4">Save</PrimaryButton>
+                        <PrimaryButton disabled={processing}>Save</PrimaryButton>
                         <button className="mt-4" onClick={() => { setEditing(false); reset(); clearErrors(); }}>Cancel</button>
                     </div>
                 </form>
