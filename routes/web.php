@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 use App\Helpers\Helper;
-
+use App\Http\Controllers\CrewController;
 use App\Models\Event;
 use App\Models\Gallery;
 
@@ -127,6 +127,11 @@ Route::post('event-upload/{event_upload}', [EventController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('event-upload.update');
 
+
+/** CREW UPLOAD **/
+Route::resource('crew-upload', CrewController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
 
 /** DASHBOARD **/
 Route::get('/dashboard', function () {
