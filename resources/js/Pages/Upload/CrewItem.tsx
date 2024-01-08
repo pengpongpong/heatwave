@@ -31,7 +31,7 @@ export default function CrewItem({ auth, crew }: PageProps<{ crew: CrewProps }>)
 
     return (
         <li key={crew.id} className="flex-col justify-between gap-x-6 p-4">
-            {crew.user_id === auth.user.id &&
+            {crew.user.id === auth.user.id &&
                 <Dropdown>
                     <Dropdown.Trigger headline={`Crew Member: ${crew.title}`}>
                         <button>

@@ -136,7 +136,7 @@ export default function EventUpload({ auth, events }: PageProps<{ events: EventP
 
                 <ul role="list" className="mt-6 divide-y divide-dashed  divide-black border border-black">
                     {events.map((event: EventProps) => (
-                        <EventItem event={event} key={event.id} />
+                        <EventItem event={event} key={event.id} auth={auth} />
                     ))}
                 </ul>
             </div>

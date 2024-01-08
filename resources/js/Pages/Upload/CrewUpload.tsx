@@ -21,6 +21,10 @@ export type CrewProps = {
     description: string;
     created_at: string;
     updated_at: string;
+    user: {
+        id: number;
+        name: string;
+    }
 }
 
 const CrewUpload = ({ auth, crew }: PageProps<{ crew: CrewProps[] }>) => {

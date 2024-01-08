@@ -18,7 +18,7 @@ class GalleryController extends Controller
     {
         // get events from database for input selection and image urls
         $event_list = Event::select('name', 'id')->get();
-        $image_list = Gallery::select('event', 'url', 'id')->get();
+        $image_list = Gallery::with('user:id,name')->select('event', 'url', 'id', 'user_id')->get();
         $error = Session::get('error');
 
         // encode image-url for presentation and prepend aws_path

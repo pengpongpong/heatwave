@@ -9,12 +9,18 @@ import TextInput from "@/Components/common/TextInput";
 import GalleryItem from "./GalleryItem";
 import { PageProps } from "@/types";
 
+export type ImageListProps = {
+    event: string;
+    url: string;
+    id: string;
+    user: {
+        id: number;
+        name: string;
+    }
+};
+
 type GalleryUploadProps = {
-    imageList: {
-        event: string;
-        url: string;
-        id: string;
-    }[];
+    imageList: ImageListProps[];
     eventList: {
         name: string,
         id: number

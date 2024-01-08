@@ -18,7 +18,7 @@ class CrewController extends Controller
      */
     public function index(): Response
     {
-        $crew = Crew::latest()->get();
+        $crew = Crew::with('user:id,name')->latest()->get();
 
         $crew->transform(function ($member) {
             $member['image_url'] = Helper::awsPath($member['image_url']);

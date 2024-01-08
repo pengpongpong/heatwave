@@ -1,12 +1,9 @@
 import Dropdown from "@/Components/common/Dropdown"
 import { PageProps } from "@/types";
+import { ImageListProps } from "./GalleryUpload";
 
 type GalleryItemProps = {
-    imageList: {
-        event: string;
-        url: string;
-        id: string;
-    }[];
+    imageList: ImageListProps[];
     name: string;
 }
 
@@ -26,9 +23,9 @@ export default function GalleryItem({ name, imageList, auth }: PageProps<Gallery
                         {imageList.map((image) => {
                             if (image.event === name) {
                                 return <li className="mb-4" key={image.url} >
-                                    {
+                                    {image.user.id === auth.user.id &&
                                         <Dropdown>
-                                            <Dropdown.Trigger headline={auth.name}>
+                                            <Dropdown.Trigger headline={image.id}>
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
                                                         <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -41,6 +38,7 @@ export default function GalleryItem({ name, imageList, auth }: PageProps<Gallery
                                                 </Dropdown.Link>
                                             </Dropdown.Content>
                                         </Dropdown>
+
                                     }
                                     < img src={image.url} width={200} />
                                 </li>
