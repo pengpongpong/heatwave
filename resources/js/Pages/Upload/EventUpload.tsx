@@ -11,14 +11,14 @@ import TextInput from "@/Components/common/TextInput";
 import InputLabel from "@/Components/common/InputLabel";
 import TextArea from "@/Components/common/TextArea";
 
-export default function EventUpload({ auth, events }: PageProps & { events: EventProps[] }) {
+export default function EventUpload({ auth, events }: PageProps<{ events: EventProps[] }>) {
     const { data, setData, post, processing, reset, errors } = useForm({
         name: "",
         date: "",
         time: "",
         location: "",
         artist: "",
-        cover_url: null as any,
+        cover_url: null as File | null,
         description: "",
     });
 
@@ -50,7 +50,7 @@ export default function EventUpload({ auth, events }: PageProps & { events: Even
 
                     <div className="mb-4">
                         <InputLabel htmlFor="date" value="Date" />
-                     
+
                         <TextInput
                             type="date"
                             id="date"
@@ -109,7 +109,7 @@ export default function EventUpload({ auth, events }: PageProps & { events: Even
                             type="file"
                             id="cover_url"
                             name="cover_url"
-                            defaultValue={data.cover_url}
+                            defaultValue={typeof data.cover_url === 'string' ? data.cover_url : ""}
                             className="mt-1 p-2 block w-full"
                             onChange={e => {
                                 if (!e.target.files) return
@@ -121,7 +121,7 @@ export default function EventUpload({ auth, events }: PageProps & { events: Even
 
                     <div className="mb-4">
                         <InputLabel htmlFor="description" value="Description" />
-                      
+
                         <TextArea
                             value={data.description}
                             name="description"
@@ -130,7 +130,7 @@ export default function EventUpload({ auth, events }: PageProps & { events: Even
                         />
                         <InputError message={errors.description} className="mt-2" />
                     </div>
-                    
+
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
                 </form>
 

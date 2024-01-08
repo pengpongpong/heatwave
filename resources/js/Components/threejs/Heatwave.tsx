@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { MathUtils } from "three";
+import { MathUtils, Object3D } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, useScroll } from "@react-three/drei"
 
@@ -9,7 +9,7 @@ const Heatwave = () => {
     const model = useGLTF('./heatwave2.glb');
 
     const scroll = useScroll();
-    const modelRef = useRef<any>(null)
+    const modelRef = useRef<Object3D>(null)
 
     const { width } = useThree((state) => (state.viewport))
 

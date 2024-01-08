@@ -37,7 +37,7 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
                     rel="noopener noreferrer"
                     className="flex gap-2"
                   >
-                    <img src="/bxl-instagram.svg" width={25} alt="Instagram" />
+                    <img src="/icons/bxl-instagram.svg" width={25} alt="Instagram" />
                     Instagram
                   </a>
                 </li>
@@ -46,7 +46,7 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
                     href={route("events")}
                     className="flex gap-2"
                   >
-                    <img src="/bxs-hand-right.svg" width={25} alt="Events" />
+                    <img src="/icons/bxs-hand-right.svg" width={25} alt="Events" />
                     Website
                   </a>
                 </li>
@@ -55,7 +55,7 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
                     href={route("home")}
                     className="flex gap-2"
                   >
-                    <img src="/bx-envelope.svg" width={25} alt="Mail icon" />
+                    <img src="/icons/bx-envelope.svg" width={25} alt="Mail icon" />
                     Kontakt
                   </a>
                 </li>

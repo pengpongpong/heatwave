@@ -1,4 +1,5 @@
 import Dropdown from "@/Components/common/Dropdown"
+import { PageProps } from "@/types";
 
 type GalleryItemProps = {
     imageList: {
@@ -7,12 +8,9 @@ type GalleryItemProps = {
         id: string;
     }[];
     name: string;
-    auth: {
-        name: string;
-    };
 }
 
-export default function GalleryItem({ name, imageList, auth }: GalleryItemProps) {
+export default function GalleryItem({ name, imageList, auth }: PageProps<GalleryItemProps>) {
     return (
         <div className="py-5">
             <details className="group">

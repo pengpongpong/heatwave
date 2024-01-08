@@ -1,5 +1,5 @@
 import { FormEvent, useEffect } from "react";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 
 import InputError from "@/Components/common/InputError";
 import PrimaryButton from "@/Components/common/PrimaryButton";
@@ -22,14 +22,13 @@ type GalleryUploadProps = {
     error?: string
 }
 
-const GalleryUpload = ({ imageList, eventList, error }: PageProps<GalleryUploadProps>) => {
-    const { auth }: any = usePage().props;
 
+const GalleryUpload = ({ auth, imageList, eventList, error }: PageProps<GalleryUploadProps>) => {
     const { data, setData, post, processing, progress, reset, errors } = useForm({
         event: "",
         eventId: 0,
-        images: null as any,
-        'images.0': null as any
+        images: null as File[] | null,
+        'images.0': null as File[] | null
     })
 
     const onSubmit = (e: FormEvent) => {
@@ -58,21 +57,18 @@ const GalleryUpload = ({ imageList, eventList, error }: PageProps<GalleryUploadP
                     <div className="my-4">
                         <InputLabel htmlFor="event" value="Event" />
 
-                        <TextInput
+                        <select
                             id="event"
                             name="event"
                             value={data.event}
-                            list="eventList"
-                            placeholder="Event"
                             className="mt-1 p-2 block w-full"
-                            isFocused={true}
                             onChange={(e) => setData('event', e.target.value)}
-                        />
-                        <datalist id="eventList">
+                        >
+                            <option hidden>Select Event</option>
                             {
-                                eventList.map((event) => (<option key={event.name} value={event.name} />))
+                                eventList.map((event) => (<option key={event.name} value={event.name}>{event.name}</option>))
                             }
-                        </datalist>
+                        </select>
 
                         <InputError message={errors.event} className="mt-2" />
                     </div>
@@ -85,11 +81,12 @@ const GalleryUpload = ({ imageList, eventList, error }: PageProps<GalleryUploadP
                             id="images"
                             name="images"
                             multiple
-                            defaultValue={data.images}
+                            defaultValue={typeof data.images === 'string' ? data.images : ""}
                             className="mt-1 p-2 block w-full"
                             onChange={e => {
                                 if (!e.target.files) return
-                                setData('images', e.target.files)
+                                const filesArray = Array.from(e.target.files);
+                                setData('images', filesArray);
                             }}
                         />
 

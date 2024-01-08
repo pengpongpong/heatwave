@@ -86,7 +86,7 @@ const Contact = ({ error, success }: ContactProps) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img className="inline mr-2" src="/bxl-instagram.svg" width={25} alt="Instagram" />
+                                <img className="inline mr-2" src="/icons/bxl-instagram.svg" width={25} alt="Instagram" />
                                 Instagram
                             </a>
                         </li>
@@ -96,7 +96,7 @@ const Contact = ({ error, success }: ContactProps) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img className="inline mr-2" src="/bx-envelope.svg" width={25} alt="Events" />
+                                <img className="inline mr-2" src="/icons/bx-envelope.svg" width={25} alt="Events" />
                                 Email
                             </a>
                         </li>

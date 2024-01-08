@@ -70,7 +70,7 @@ const NavbarMobile = ({ active }: { active: boolean }) => {
 
             <div className="flex justify-between gap-8">
                 <Link href={route("home")} className={`flex items-center rounded-full border ${route().current("home") ? "border-[#000000]" : "border-[#dafbf7]"} overflow-hidden`}>
-                    <img src="./heatwave_logo.png" width={50} />
+                    <img src="https://res.cloudinary.com/dzvrnl80x/image/upload/v1704719016/heatwave/heatwave_logo.png" width={50} />
                 </Link>
                 <Hamburger inputRef={inputRef} onClick={handleShow} />
             </div>

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useForm, usePage } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 import Dropdown from '@/Components/common/Dropdown';
 import InputError from '@/Components/common/InputError';
@@ -18,10 +18,7 @@ const eventDate = (date: Date) => {
     })
 }
 
-export default function EventItem({ event }: { event: EventProps }) {
-    //! fix any
-    const { auth }: PageProps<any> = usePage().props;
-
+export default function EventItem({ auth, event }: PageProps<{ event: EventProps }>) {
     const [editing, setEditing] = useState(false);
 
     const { data, setData, post, clearErrors, reset, processing, errors } = useForm({
@@ -30,7 +27,7 @@ export default function EventItem({ event }: { event: EventProps }) {
         time: event.time,
         location: event.location,
         artist: event.artist,
-        cover_url: null as any,
+        cover_url: null as File | null,
         description: event.description,
     });
 
@@ -163,7 +160,7 @@ export default function EventItem({ event }: { event: EventProps }) {
                             type="file"
                             id="cover_url"
                             name="cover_url"
-                            defaultValue={data.cover_url}
+                            defaultValue={typeof data.cover_url === 'string' ? data.cover_url : ""}
                             className="mt-1 p-2 block w-full"
                             onChange={e => {
                                 if (!e.target.files) return

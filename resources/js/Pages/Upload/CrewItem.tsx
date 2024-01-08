@@ -7,8 +7,8 @@ import PrimaryButton from '@/Components/common/PrimaryButton';
 import InputLabel from "@/Components/common/InputLabel";
 import TextInput from "@/Components/common/TextInput";
 import TextArea from "@/Components/common/TextArea";
-import { PageProps } from "@/types";
 import { CrewProps } from "./CrewUpload";
+import { PageProps } from "@/types";
 
 
 export default function CrewItem({ auth, crew }: PageProps<{ crew: CrewProps }>) {
@@ -19,7 +19,7 @@ export default function CrewItem({ auth, crew }: PageProps<{ crew: CrewProps }>)
         instagram: crew.instagram,
         website: crew.website,
         email: crew.email,
-        image_url: null as any,
+        image_url:  null as File | null,
         description: crew.description,
     });
 

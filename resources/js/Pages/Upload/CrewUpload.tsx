@@ -1,7 +1,6 @@
-import React, { FormEvent } from 'react'
+import { FormEvent } from 'react'
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { PageProps } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import InputLabel from "@/Components/common/InputLabel";
 import TextInput from "@/Components/common/TextInput";
@@ -9,6 +8,7 @@ import InputError from "@/Components/common/InputError";
 import PrimaryButton from "@/Components/common/PrimaryButton";
 import TextArea from "@/Components/common/TextArea";
 import CrewItem from "./CrewItem";
+import { PageProps } from "@/types";
 
 export type CrewProps = {
     id: number;
