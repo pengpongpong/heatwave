@@ -14,6 +14,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\CrewController;
 use App\Models\Event;
 use App\Models\Gallery;
+use App\Models\Crew;
 
 use Carbon\Carbon;
 
@@ -91,7 +92,17 @@ Route::get('/ueber-uns', function () {
 
 /** THE CREW **/
 Route::get('/crew', function () {
-    return Inertia::render('Pages/TheCrew', []);
+    $crew = Crew::orderBy('id')->get();
+
+    $crew->transform(function($member) {
+        $member['image_url'] = Helper::awsPath($member['image_url']);
+
+        return $member;
+    });
+
+    return Inertia::render('Pages/TheCrew', [
+        'crew' => $crew,
+    ]);
 })->name('theCrew');
 
 

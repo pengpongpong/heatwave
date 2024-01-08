@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import createCrewSlider from './crew-slider';
 import './crew-slider.scss';
 import './index.scss';
+import { CrewProps } from "@/Pages/Upload/CrewUpload";
 
 
 type CrewSwiperSlideProps = {
@@ -21,7 +22,7 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
           <div className="crew-slider-title-text">{title}</div>
         </div>
         {/* <!-- slide image wrap --> */}
-        <div className="mt-24 h-fit crew-slider-scale">
+        <div className="mt-24 lg:mt-36 h-fit crew-slider-scale">
           {/* <!-- slide image --> */}
           {/* <img src={imgSrc} /> */}
           <div id="active-slide" className="lg:mt-16 flex flex-col justify-center items-center lg:flex-row gap-8">
@@ -68,22 +69,8 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
   )
 }
 
-const data = {
-  first: {
-    title: "Oh Teezy",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-   },
-  second: {
-    title: "DJ Raifu",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-   },
-  third: {
-    title: "DJ Noah",
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-   },
-}
 
-const CrewSwiper = () => {
+const CrewSwiper = ({ crew }: { crew: CrewProps[] }) => {
   useEffect(() => {
     const sliderEl = document.querySelector('.crew-slider');
 
@@ -96,21 +83,13 @@ const CrewSwiper = () => {
       <div className="crew-slider">
         <div className="swiper">
           <div className="swiper-wrapper">
-            <CrewSwiperSlide
-              title="Oh Teezy"
-              text={data.first.text}
-              imgSrc="/crew3.png"
-            />
-            <CrewSwiperSlide
-              title="DJ Raifu"
-              text={data.first.text}
-              imgSrc="/crew.png"
-            />
-            <CrewSwiperSlide
-              title="DJ Noah"
-              text={data.first.text}
-              imgSrc="/crew3.png"
-            />
+            {crew.map((member) => (
+              <CrewSwiperSlide
+                title={member.title}
+                text={member.description}
+                imgSrc={member.image_url}
+              />
+            ))}
           </div>
           {/* <!-- right/next navigation button --> */}
           <div className="crew-slider-button-prev crew-slider-button">

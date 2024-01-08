@@ -1,15 +1,16 @@
 import MainLayout from "@/Layouts/MainLayout"
 
 import CrewSwiper from "@/Components/swiper/the-crew/CrewSwiper"
+import { CrewProps } from "../Upload/CrewUpload"
 
 
-const TheCrew = () => {
+const TheCrew = ({ crew }: { crew: CrewProps[] }) => {
     return (
         <MainLayout
             title="The Crew"
             hideNav={false}>
 
-            <CrewSwiper />
+            <CrewSwiper crew={crew} />
         </MainLayout>
     )
 }

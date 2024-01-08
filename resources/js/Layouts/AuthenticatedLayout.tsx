@@ -32,6 +32,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 <NavLink href={route('gallery-upload.index')} active={route().current('gallery-upload.index')}>
                                     Gallery Upload
                                 </NavLink>
+                                <NavLink href={route('crew-upload.index')} active={route().current('crew-upload.index')}>
+                                    Crew Upload
+                                </NavLink>
                             </div>
                         </div>
 
