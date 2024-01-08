@@ -1,49 +1,75 @@
-import React, { FormEvent } from 'react'
+import { FormEvent, useState } from 'react';
+import { useForm } from '@inertiajs/react';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { PageProps } from "@/types";
-import { Head, useForm } from "@inertiajs/react";
+import Dropdown from '@/Components/common/Dropdown';
+import InputError from '@/Components/common/InputError';
+import PrimaryButton from '@/Components/common/PrimaryButton';
 import InputLabel from "@/Components/common/InputLabel";
 import TextInput from "@/Components/common/TextInput";
-import InputError from "@/Components/common/InputError";
-import PrimaryButton from "@/Components/common/PrimaryButton";
 import TextArea from "@/Components/common/TextArea";
-import CrewItem from "./CrewItem";
+import { PageProps } from "@/types";
+import { CrewProps } from "./CrewUpload";
 
-export type CrewProps = {
-    id: number;
-    user_id: number;
-    title: string;
-    instagram: string;
-    website: string;
-    email: string;
-    image_url: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-}
 
-const CrewUpload = ({ auth, crew }: PageProps<{ crew: CrewProps[] }>) => {
-    const { data, setData, post, processing, reset, errors } = useForm({
-        title: "",
-        instagram: "",
-        website: "",
-        email: "",
-        image_url: null as File | null,
-        description: ""
-    })
+export default function CrewItem({ auth, crew }: PageProps<{ crew: CrewProps }>) {
+    const [editing, setEditing] = useState(false);
+
+    const { data, setData, post, clearErrors, reset, processing, errors } = useForm({
+        title: crew.title,
+        instagram: crew.instagram,
+        website: crew.website,
+        email: crew.email,
+        image_url: null as any,
+        description: crew.description,
+    });
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        post(route('crew-upload.store'), { onSuccess: () => reset() });
-    }
+
+        post(route('crew-upload.update', crew.id), { onSuccess: () => setEditing(false) });
+    };
 
     return (
-        <AuthenticatedLayout user={auth.user}>
-            <Head title="Crew" />
-            <div className="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-                <form onSubmit={submit}>
-                    <legend className="text-center text-xl">Create new Crew Member</legend>
+        <li key={crew.id} className="flex-col justify-between gap-x-6 p-4">
+            {crew.user_id === auth.user.id &&
+                <Dropdown>
+                    <Dropdown.Trigger headline={`Crew Member: ${crew.title}`}>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                            </svg>
+                        </button>
+                    </Dropdown.Trigger>
+                    <Dropdown.Content>
+                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
+                            Edit
+                        </button>
+                        <Dropdown.Link as="button" href={route('crew-upload.destroy', crew.id)} method="delete">
+                            Delete
+                        </Dropdown.Link>
+                    </Dropdown.Content>
+                </Dropdown>
+            }
+
+            <div className="flex justify-between gap-x-6 py-5">
+                <div className="flex flex-col min-w-0 gap-x-4 text-gray-900">
+                    <p>Title: {crew.title}</p>
+                    <p>Instagram: <a className="underline" target="_blank" rel="noopener noreferrer" href={crew.instagram}>{crew.instagram}</a></p>
+                    <p>Website:  <a className="underline" target="_blank" rel="noopener noreferrer" href={crew.website}>{crew.website}</a></p>
+                    <p>Email: <a className="underline" target="_blank" rel="noopener noreferrer" href={`mailto:${crew.email}`}>{crew.email}</a></p>
+                </div>
+            </div>
+
+            <img src={crew.image_url} width={150} />
+            <div className="mt-2">
+                <span className="text-gray-800">Created by: {auth.user.name}</span>
+                <small className="ml-2 text-sm text-gray-600">{new Date(crew.updated_at).toLocaleString("de-AT")}</small>
+                {crew.created_at !== crew.updated_at && <small className="text-sm text-gray-600"> &middot; edited</small>}
+            </div>
+
+
+            {editing
+                ? <form onSubmit={submit}>
                     <div className="my-4">
                         <InputLabel htmlFor="title" value="Crew Name" />
 
@@ -129,17 +155,13 @@ const CrewUpload = ({ auth, crew }: PageProps<{ crew: CrewProps[] }>) => {
                         <InputError message={errors.description} className="mt-2" />
                     </div>
 
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <div className="space-x-2">
+                        <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                        <button className="mt-4" onClick={() => { setEditing(false); reset(); clearErrors(); }}>Cancel</button>
+                    </div>
                 </form>
-
-                <ul role="list" className="mt-6 divide-y divide-dashed  divide-black border border-black">
-                    {crew.map((member: CrewProps) => (
-                        <CrewItem crew={member} key={member.id} auth={auth}/>
-                    ))}
-                </ul>
-            </div>
-        </AuthenticatedLayout>
+                : <p className="mt-4 text-gray-900">Description: {crew.description}</p>
+            }
+        </li>
     )
 }
-
-export default CrewUpload

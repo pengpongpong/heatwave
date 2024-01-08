@@ -130,8 +130,14 @@ Route::post('event-upload/{event_upload}', [EventController::class, 'update'])
 
 /** CREW UPLOAD **/
 Route::resource('crew-upload', CrewController::class)
-    ->only(['index', 'store'])
+    ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+// put, patch not working with file uploads -> only post
+Route::post('crew-upload/{crew_upload}', [CrewController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('crew-upload.update');
+
 
 /** DASHBOARD **/
 Route::get('/dashboard', function () {

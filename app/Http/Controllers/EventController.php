@@ -43,7 +43,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEventRequest $request)
+    public function store(StoreEventRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -58,7 +58,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event_upload)
+    public function update(Request $request, Event $event_upload): RedirectResponse
     {
         $this->authorize('update', $event_upload);
 

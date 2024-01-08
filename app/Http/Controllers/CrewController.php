@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Crew;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,15 +18,17 @@ class CrewController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Upload/CrewUpload', []);
-    }
+        $crew = Crew::latest()->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $crew->transform(function ($member) {
+            $member['image_url'] = Helper::awsPath($member['image_url']);
+
+            return $member;
+        });
+
+        return Inertia::render('Upload/CrewUpload', [
+            'crew' => $crew,
+        ]);
     }
 
     /**
@@ -52,34 +55,49 @@ class CrewController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Crew $crew)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Crew $crew)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Crew $crew)
+    public function update(Request $request, Crew $crew_upload): RedirectResponse
     {
-        //
+        $this->authorize('update', $crew_upload);
+
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'instagram' => 'required|string',
+            'website' => 'required|string',
+            'email' => 'required|email',
+            'image_url' => 'nullable|mimes:webp|max:2048',
+            'description' => 'required|string'
+        ]);
+
+        $crew = Crew::where('id', $crew_upload['id'])->get();
+        $image_url_old = $crew[0]->image_url;
+
+        if (isset($validated['image_url'])) {
+            Storage::delete($image_url_old);
+
+            $path = Storage::put('crew', $validated['image_url']);  
+            $validated['image_url'] = $path;
+        } else {
+            $validated['image_url'] = $image_url_old;
+        }
+
+        $crew_upload->update($validated);
+
+        return redirect(route('crew-upload.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Crew $crew)
+    public function destroy(Crew $crew_upload): RedirectResponse
     {
-        //
+        $this->authorize('delete', $crew_upload);
+
+        Storage::delete($crew_upload->image_url);
+
+        $crew_upload->delete();
+
+        return redirect(route('crew-upload.index'));
     }
 }
