@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber"
-import { Html, ScrollControls, Text } from "@react-three/drei";
+import { ScrollControls } from "@react-three/drei";
 import Heatwave from "./Heatwave";
 
 const Intro = () => {

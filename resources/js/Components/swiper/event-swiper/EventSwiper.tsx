@@ -37,7 +37,7 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl }: Ev
 
                 {/* Expanding collection cover */}
                 <div className="expanding-collection-cover">
-                    <img src={imageUrl} width={500} height={500}/>
+                    <img src={imageUrl} width={500} height={500} />
                 </div>
             </div>
         </div>
