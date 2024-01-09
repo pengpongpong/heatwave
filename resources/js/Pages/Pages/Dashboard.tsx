@@ -1,7 +1,7 @@
+import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
-import { PageProps } from '@/types';
 import NavLink from "@/Components/common/NavLink";
+import { PageProps } from '@/types';
 
 export default function Dashboard({ auth }: PageProps) {
     return (
@@ -17,6 +17,7 @@ export default function Dashboard({ auth }: PageProps) {
                         <div className="p-6 text-gray-900">You're logged in!</div>
                         <NavLink className="ml-4 text-xl underline" href={route('event-upload.index')} active={route().current('event-upload.index')}>Event Upload</NavLink>
                         <NavLink className="ml-4 text-xl underline" href={route('gallery-upload.index')} active={route().current('gallery-upload.index')}>Gallery Upload</NavLink>
+                        <NavLink className="ml-4 text-xl underline" href={route('crew-upload.index')} active={route().current('crew-upload.index')}>Crew Upload</NavLink>
                     </div>
                 </div>
             </div>

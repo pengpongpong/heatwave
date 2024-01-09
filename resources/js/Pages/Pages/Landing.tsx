@@ -4,6 +4,7 @@ import { urlFor } from "@/utils/utils";
 import Intro from "@/Components/threejs/Intro";
 import MainLayout from "@/Layouts/MainLayout";
 import PhoneContainer from "@/Components/phone/PhoneContainer";
+import PageHeadline from "@/Components/common/PageHeadline";
 
 type LandingData = {
     // firstPortrait: string
@@ -26,7 +27,7 @@ export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
                     <Intro />
                 </div>
                 <main className="m-4 lg:m-12" id="main">
-                    <h1 className="my-8 text-4xl text-center">Heatwave</h1>
+                    <PageHeadline title="Heatwave"/>
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             <PhoneContainer />

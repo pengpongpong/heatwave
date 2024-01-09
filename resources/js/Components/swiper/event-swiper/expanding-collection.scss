@@ -29,11 +29,13 @@
     transform: translate3d(0, 0, 0);
   }
   .swiper-slide {
-    margin-top: 5rem;
+    margin-top: 4rem;
     justify-content: center;
-    // align-items: flex-start;
     display: flex;
     width: calc(100% - 32px);
+    @media screen and (max-height: 800px) {
+      margin-top: .5rem;
+    }
   }
 
   &-initialized &-content,

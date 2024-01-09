@@ -1,3 +1,4 @@
+import PageHeadline from "@/Components/common/PageHeadline";
 import SwiperGallery from "@/Components/swiper/gallery/SwiperGallery"
 import MainLayout from "@/Layouts/MainLayout"
 
@@ -19,8 +20,7 @@ const Gallery = ({ hideNav, imageList, eventList }: GalleryProps) => {
   return (
     <MainLayout title="Gallery" hideNav={hideNav}>
       <main className="flex-grow">
-        <h1 className="mt-12 mb-8 text-4xl text-center tracking-wider">Galerie</h1>
-
+        <PageHeadline title="Galerie" />
         <ul>
           {
             eventList.map((event) => {

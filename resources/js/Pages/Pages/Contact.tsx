@@ -1,5 +1,6 @@
 import InputError from "@/Components/common/InputError";
 import InputLabel from "@/Components/common/InputLabel";
+import PageHeadline from "@/Components/common/PageHeadline";
 import TextInput from "@/Components/common/TextInput";
 import MainLayout from "@/Layouts/MainLayout"
 import { useForm } from "@inertiajs/react";
@@ -76,10 +77,9 @@ const Contact = ({ error, success }: ContactProps) => {
     return (
         <MainLayout title="Contact" hideNav={false}>
             <main className="w-full p-8 flex-grow">
-                <h1 className="my-8 text-2xl lg:text-6xl text-center">Kontaktiere uns!</h1>
-
+                <PageHeadline title="Kontaktiere uns!" />
                 <div>
-                    <ul className="mt-8 mx-auto w-fit lg:mt-24 text-xl lg:text-2xl text-left">
+                    <ul className="mt-8 mx-auto w-fit lg:mt-16 text-xl lg:text-2xl text-left">
                         <li className="mb-2">
                             <a
                                 href={"https://www.instagram.com/heatwave.association/"}
