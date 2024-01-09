@@ -154,7 +154,7 @@ const Contact = ({ error, success }: ContactProps) => {
                         <InputError message={errors.email} className="mt-2" />
                     </div>
                     {error ? <span className="w-full mt-4 inline-block text-center text-red-600">{error}</span> : null}
-                    <button className="mt-6 px-4 py-3 w-full flex justify-center rounded-lg bg-purple text-lightBlue shadow-xl">{processing ? <PuffLoader size={24} /> : "Senden"}</button>
+                    <button className="mt-6 px-4 py-3 w-full flex justify-center rounded-lg bg-purple text-lightBlue shadow-xl hover:text-black duration-200 transition-colors">{processing ? <PuffLoader size={24} /> : "Senden"}</button>
                 </form>
                 {success ? <span className="w-full mt-4 inline-block text-center">{success}</span> : null}
             </main>
