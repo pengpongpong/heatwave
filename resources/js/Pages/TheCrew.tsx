@@ -1,7 +1,7 @@
 import MainLayout from "@/Layouts/MainLayout"
 
 import CrewSwiper from "@/Components/swiper/the-crew/CrewSwiper"
-import { CrewProps } from "../Upload/CrewUpload"
+import { CrewProps } from "./Upload/CrewUpload"
 import PageHeadline from "@/Components/common/PageHeadline"
 
 
