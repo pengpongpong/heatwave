@@ -2,11 +2,11 @@ import { useRef, useState } from "react";
 
 import { MathUtils, Object3D } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useGLTF, useScroll, Box, Text } from "@react-three/drei"
+import { useGLTF, useScroll, Text } from "@react-three/drei"
 
 
 const Heatwave = () => {
-    const model = useGLTF('./heatwave2.glb');
+    const model = useGLTF('https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816261/heatwave/heatwave_model.glb');
 
     const scroll = useScroll();
     const modelRef = useRef<Object3D>(null)
