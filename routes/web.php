@@ -38,7 +38,7 @@ Route::get('/', function () {
 
     $data['videoUrl'] = "";
 
-    return Inertia::render('Landing', [
+    return Inertia::render('Page/Landing', [
         'data' => $data,
         'hideNav' => true
     ]);
@@ -62,7 +62,7 @@ Route::get('/galerie', function () {
         return $image;
     });
 
-    return Inertia::render('Gallery', [
+    return Inertia::render('Page/Gallery', [
         "imageList" => $image_list,
         'eventList' => $event_list,
         'hideNav' => false
@@ -84,7 +84,7 @@ Route::get('/events', function () {
         return $event;
     });
 
-    return Inertia::render('Events', [
+    return Inertia::render('Page/Events', [
         'events' => $events
     ]);
 })->name('events');
@@ -94,7 +94,7 @@ Route::get('/events', function () {
  * ABOUT US PAGE
  */
 Route::get('/ueber-uns', function () {
-    return Inertia::render('About', []);
+    return Inertia::render('Page/About', []);
 })->name('about');
 
 
@@ -110,7 +110,7 @@ Route::get('/crew', function () {
         return $member;
     });
 
-    return Inertia::render('TheCrew', [
+    return Inertia::render('Page/TheCrew', [
         'crew' => $crew,
     ]);
 })->name('theCrew');
@@ -123,7 +123,7 @@ Route::get('/kontakt', function () {
     $error = Session::get('error');
     $success = Session::get('success');
 
-    return Inertia::render('Contact', [
+    return Inertia::render('Page/Contact', [
         'error' => $error,
         'success' => $success
     ]);
@@ -172,7 +172,7 @@ Route::post('crew-upload/{crew_upload}', [CrewController::class, 'update'])
  * DASHBOARD
  */
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Page/Dashboard');
 })->middleware(['auth', 'verified'])
     ->name('dashboard');
 
