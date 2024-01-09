@@ -34,7 +34,8 @@ const CrewUpload = ({ auth, crew }: PageProps<{ crew: CrewProps[] }>) => {
         website: "",
         email: "",
         image_url: null as File | null,
-        description: ""
+        description: "",
+        type: "store"
     })
 
     const submit = (e: FormEvent) => {

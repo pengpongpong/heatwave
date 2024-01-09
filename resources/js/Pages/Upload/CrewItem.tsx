@@ -21,6 +21,7 @@ export default function CrewItem({ auth, crew }: PageProps<{ crew: CrewProps }>)
         email: crew.email,
         image_url:  null as File | null,
         description: crew.description,
+        type: "update"
     });
 
     const submit = (e: FormEvent) => {

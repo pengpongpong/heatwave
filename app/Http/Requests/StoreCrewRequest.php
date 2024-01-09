@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEventRequest extends FormRequest
+class StoreCrewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,15 +21,15 @@ class StoreEventRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'type' => 'required|string|in:store,update',
-            'name' => 'required|string|max:256',
-            'date' => 'required|date',
-            'time' => 'required|string',
-            'location' => 'required|string|max:256',
-            'artist' => 'required|string|max:256',
-            'cover_url' => 'nullable|required_if:type,store|mimes:webp|max:2048',
-            'description' => 'required|string',
+            'title' => 'required|string',
+            'instagram' => 'required|string',
+            'website' => 'required|string',
+            'email' => 'required|email',
+            'image_url' => 'nullable|required_if:type,store|mimes:webp|max:2048',
+            'description' => 'required|string'
         ];
     }
 }

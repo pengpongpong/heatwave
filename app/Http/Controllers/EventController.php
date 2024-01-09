@@ -50,31 +50,16 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event_upload): RedirectResponse
+    public function update(StoreEventRequest $request, Event $event_upload): RedirectResponse
     {
         $this->authorize('update', $event_upload);
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:256',
-            'date' => 'required|date',
-            'time' => 'required|string',
-            'location' => 'required|string|max:256',
-            'artist' => 'required|string|max:256',
-            'cover_url' => 'nullable|mimes:webp|max:2048',
-            'description' => 'required|string',
-        ]);
+        $validated = $request->validated();
 
         $event = Event::where('id', $event_upload['id'])->get();
-        $cover_url_old = $event[0]->cover_url;
 
-        if (isset($validated['cover_url'])) {
-            Storage::delete($cover_url_old);
-
-            $path = Storage::put('events/cover', $validated['cover_url']);
-            $validated['cover_url'] = $path;
-        } else {
-            $validated['cover_url'] = $cover_url_old;
-        }
+        // update storage
+        Helper::updateStorage($validated, 'cover_url', $event[0]->cover_url, 'events/cover');
 
         $event_upload->update($validated);
         return redirect(route('event-upload.index'));

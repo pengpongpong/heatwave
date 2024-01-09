@@ -29,6 +29,7 @@ export default function EventItem({ auth, event }: PageProps<{ event: EventProps
         artist: event.artist,
         cover_url: null as File | null,
         description: event.description,
+        type: "update"
     });
 
     const submit = (e: FormEvent) => {

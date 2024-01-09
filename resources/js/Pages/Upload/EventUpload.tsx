@@ -20,6 +20,7 @@ export default function EventUpload({ auth, events }: PageProps<{ events: EventP
         artist: "",
         cover_url: null as File | null,
         description: "",
+        type: "store"
     });
 
     const submit = (e: FormEvent) => {

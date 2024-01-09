@@ -41,7 +41,7 @@ const Navbar = ({ hideNav = false }: { hideNav: boolean }) => {
             >
                 <div className="flex items-center gap-6">
                     <Link href={route("home")} className={`relative flex items-center rounded-full border ${route().current("home") ? "border-[#000000]" : "border-[#dafbf7]"} hover:border-black hover:scale-110 bg-[#01b9c3] transition-all duration-300 cursor-pointer overflow-hidden`}>
-                        <img src="https://res.cloudinary.com/dzvrnl80x/image/upload/v1704719016/heatwave/heatwave_logo.png" width={50} />
+                        <img src="https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816798/heatwave/heatwave_logo.webp" width={50} />
                     </Link>
                     <ul className={`flex gap-4 overflow-hidden`}>
                         <NavLink href={route("gallery")} active={route().current("gallery")} >Galerie</NavLink>

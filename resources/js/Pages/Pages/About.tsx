@@ -9,7 +9,7 @@ const About = (props: Props) => {
             <main className="m-4 max-w-2xl flex-grow text-center">
                 <h1 className="my-8 text-2xl lg:text-6xl text-center">Um was geht's?</h1>
                 <p className="text-center leading-8 text-lg lg:text-xl lg:leading-10">
-                    <img className="inline-block" src="https://res.cloudinary.com/dzvrnl80x/image/upload/v1704718878/heatwave/heatwave_icon.png" width={90} alt="Heatwave" />
+                    <img className="inline-block" src="https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816852/heatwave/heatwave_icon.webp" width={90} alt="Heatwave" />
                     ist eine in Graz ansässige Event-Community, die Inklusivität und Verbindung fördert. Sie ist in Österreich verwurzelt und veranstaltet verschiedenste Events, von kulturellen Feiern bis hin zu künstlerischen Präsentationen, und schafft so einen dynamischen Raum für lokale Talente und fördert das Zusammengehörigkeitsgefühl der Teilnehmer. Heatwave trägt zur kulturellen Lebendigkeit von Graz bei und bietet unvergessliche Erlebnisse, die unterhalten, die Kreativität anregen und dauerhafte Verbindungen innerhalb der Gemeinschaft schaffen.
                 </p>
                 <ul className="mt-8 mx-auto w-fit lg:mt-24 lg:text-2xl text-left">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Requests\StoreCrewRequest;
 use App\Models\Crew;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,17 +35,9 @@ class CrewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreCrewRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'instagram' => 'required|string',
-            'website' => 'required|string',
-            'email' => 'required|email',
-            'image_url' => 'required|mimes:webp|max:2048',
-            'description' => 'required|string'
-        ]);
-
+        $validated = $request->validated();
 
         $path = Storage::put('crew', $validated['image_url']);
         $validated['image_url'] = $path;
@@ -57,30 +50,16 @@ class CrewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Crew $crew_upload): RedirectResponse
+    public function update(StoreCrewRequest $request, Crew $crew_upload): RedirectResponse
     {
         $this->authorize('update', $crew_upload);
 
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'instagram' => 'required|string',
-            'website' => 'required|string',
-            'email' => 'required|email',
-            'image_url' => 'nullable|mimes:webp|max:2048',
-            'description' => 'required|string'
-        ]);
+        $validated = $request->validated();
 
         $crew = Crew::where('id', $crew_upload['id'])->get();
-        $image_url_old = $crew[0]->image_url;
-
-        if (isset($validated['image_url'])) {
-            Storage::delete($image_url_old);
-
-            $path = Storage::put('crew', $validated['image_url']);  
-            $validated['image_url'] = $path;
-        } else {
-            $validated['image_url'] = $image_url_old;
-        }
+       
+        // update storage
+        Helper::updateStorage($validated, 'image_url', $crew[0]->image_url, 'crew');
 
         $crew_upload->update($validated);
 
