@@ -151,7 +151,7 @@ Route::post('/kontakt', [SendEmailController::class, 'index'])
 /**
  * SITEMAP
  */
-Route::get('sitemap', [SitemapController::class, 'index']);
+Route::get('sitemap', [SitemapController::class, 'index'])->name('sitemap');
 
 
 /**

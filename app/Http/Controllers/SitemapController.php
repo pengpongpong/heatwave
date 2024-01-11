@@ -23,29 +23,30 @@ class SitemapController extends Controller
         $urls = [
             [
                 'loc' => 'https//heatwave.at/',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
             [
                 'loc' => 'https//heatwave.at/galerie',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
             [
                 'loc' => 'https//heatwave.at/events',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
             [
                 'loc' => 'https//heatwave.at/crew',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
             [
                 'loc' => 'https//heatwave.at/ueber-uns',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
             [
                 'loc' => 'https//heatwave.at/kontakt',
-                'lastmod' => $this->getLastModifiedDate()
+                'lastmod' => $this->getLastModifiedDate('01.01.2024')
             ],
         ];
+
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -63,8 +64,8 @@ class SitemapController extends Controller
     }
 
     // Get current time
-    private function getLastModifiedDate()
+    private function getLastModifiedDate(string $time)
     {
-        return Carbon::now()->toW3cString();
+        return Carbon::createFromFormat('d.m.Y', $time)->toW3cString();
     }
 }
