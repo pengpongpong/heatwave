@@ -186,6 +186,7 @@ return [
     ])->toArray(),
 
     'allowed_email' => env('ALLOWED_EMAIL'),
+    'contact_email' => env('CONTACT_EMAIL'),
 
     'sanity_project_id' => env('SANITY_PROJECT_ID'),
     'sanity_dataset' => env('SANITY_DATASET'),

@@ -34,7 +34,10 @@ class ContactMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('test@tranmp.dev', 'Heatwave'),
+            from: new Address(config('app.contact_email'), 'Heatwave'),
+            replyTo: [
+                new Address($this->email)
+            ],
             subject: 'Heatwave Kontaktanfrage',
         );
     }
@@ -45,7 +48,7 @@ class ContactMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'demoMail',
+            view: '/mail/contactMail',
             with: [
                 'contactName' => $this->name,
                 'contactEmail' => $this->email,

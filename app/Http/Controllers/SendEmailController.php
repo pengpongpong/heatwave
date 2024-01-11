@@ -22,7 +22,7 @@ class SendEmailController extends Controller
             $request->ip(),
             $perTwoMinute = 4,
             function () use ($name, $email, $message) {
-                Mail::to('test@tranmp.dev')->send(new ContactMail($name, $email, $message));
+                Mail::to(config('app.contact_email'))->send(new ContactMail($name, $email, $message));
             },
             $decayRate = 120,
         );
