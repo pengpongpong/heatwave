@@ -20,7 +20,7 @@ type LandingProps = {
     url: string;
 }
 
-export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
+export default function Landing({ data, hideNav, url }: PageProps<LandingProps>) {
     const seo = {
         title: "Willkommen",
         description: "",
@@ -41,7 +41,7 @@ export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
                     <Intro />
                 </div>
                 <main className="m-4 lg:m-12" id="main">
-                    <PageHeadline title="Heatwave"/>
+                    <PageHeadline title="Heatwave" />
                     <div className="flex flex-col items-center gap-4 overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             <PhoneContainer />
