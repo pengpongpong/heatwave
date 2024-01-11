@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /events-upload
+Disallow: /gallery-upload
+Disallow: /crew-upload
+Disallow: /dashboard

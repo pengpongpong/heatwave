@@ -2,11 +2,26 @@ import { Link } from "@inertiajs/react"
 import MainLayout from "@/Layouts/MainLayout"
 import PageHeadline from "@/Components/common/PageHeadline"
 
-type Props = {}
+type AboutProps = {
+    url: string;
+}
 
-const About = (props: Props) => {
+const About = ({ url }: AboutProps) => {
+    const seo = {
+        title: "Über Uns",
+        description: "",
+        keywords: "",
+        url: url,
+        image: {
+            url: "https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816852/heatwave/heatwave_icon.webp",
+            width: "2250",
+            height: "1623",
+            alt: "Heatwave"
+        }
+    }
+
     return (
-        <MainLayout title="About" hideNav={false}>
+        <MainLayout seo={seo} hideNav={false}>
             <main className="m-4 max-w-2xl flex-grow text-center">
                 <PageHeadline title="Um was geht's?" />
                 <p className="mt-8 lg:mt-20 text-center leading-8 text-lg lg:text-xl lg:leading-10">

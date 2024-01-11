@@ -9,6 +9,7 @@ import { FormEventHandler, useEffect } from "react";
 type ContactProps = {
     error: string;
     success: string;
+    url: string;
 }
 
 // loading spinner
@@ -53,12 +54,25 @@ const PuffLoader = ({ size }: { size: number }) => {
     )
 }
 
-const Contact = ({ error, success }: ContactProps) => {
+const Contact = ({ error, success, url }: ContactProps) => {
     const { data, setData, post, processing, wasSuccessful, errors, reset } = useForm({
         name: '',
         email: '',
         message: ''
     });
+
+    const seo = {
+        title: "Kontakt",
+        description: "",
+        keywords: "",
+        url: url,
+        image: {
+            url: "https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816852/heatwave/heatwave_icon.webp",
+            width: "2250",
+            height: "1623",
+            alt: "Heatwave"
+        }
+    }
 
     // submit
     const submit: FormEventHandler = (e) => {
@@ -75,7 +89,7 @@ const Contact = ({ error, success }: ContactProps) => {
     }, [wasSuccessful])
 
     return (
-        <MainLayout title="Contact" hideNav={false}>
+        <MainLayout seo={seo} hideNav={false}>
             <main className="w-full p-8 flex-grow">
                 <PageHeadline title="Kontaktiere uns!" />
                 <div>
@@ -154,7 +168,7 @@ const Contact = ({ error, success }: ContactProps) => {
                         <InputError message={errors.email} className="mt-2" />
                     </div>
                     {error ? <span className="w-full mt-4 inline-block text-center text-red-600">{error}</span> : null}
-                    <button className="mt-6 px-4 py-3 w-full flex justify-center rounded-lg bg-purple text-lightBlue shadow-xl hover:text-black duration-200 transition-colors">{processing ? <PuffLoader size={24} /> : "Senden"}</button>
+                    <button className="mt-6 px-4 py-3 w-full flex justify-center rounded-lg bg-purple text-lightBlue shadow-xl hover:border-lightBlue border border-transparent duration-200 transition-colors">{processing ? <PuffLoader size={24} /> : "Senden"}</button>
                 </form>
                 {success ? <span className="w-full mt-4 inline-block text-center">{success}</span> : null}
             </main>

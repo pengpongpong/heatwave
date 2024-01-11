@@ -12,13 +12,26 @@ type GalleryProps = {
   eventList: {
     name: string;
     id: string;
-  }[],
+  }[];
+  url: string;
 }
 
-const Gallery = ({ hideNav, imageList, eventList }: GalleryProps) => {
+const Gallery = ({ hideNav, imageList, eventList, url }: GalleryProps) => {
+  const seo = {
+    title: "Galerie",
+    description: "",
+    keywords: "",
+    url: url,
+    image: {
+      url: "https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816852/heatwave/heatwave_icon.webp",
+      width: "2250",
+      height: "1623",
+      alt: "Heatwave"
+  }
+  }
 
   return (
-    <MainLayout title="Gallery" hideNav={hideNav}>
+    <MainLayout seo={seo} hideNav={hideNav}>
       <main className="flex-grow">
         <PageHeadline title="Galerie" />
         <ul>

@@ -6,7 +6,6 @@ use App\Helpers\Helper;
 use App\Http\Requests\StoreCrewRequest;
 use App\Models\Crew;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 use Inertia\Inertia;

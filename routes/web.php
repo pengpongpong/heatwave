@@ -12,6 +12,7 @@ use Inertia\Inertia;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\CrewController;
+use App\Http\Controllers\SitemapController;
 use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\Crew;
@@ -23,7 +24,7 @@ use Carbon\Carbon;
  * HOME PAGE
  */
 Route::get('/', function () {
-
+    $url = url()->current();
     $sanityClient = app('sanity');
 
     $data = $sanityClient->fetch(
@@ -40,7 +41,8 @@ Route::get('/', function () {
 
     return Inertia::render('Page/Landing', [
         'data' => $data,
-        'hideNav' => true
+        'hideNav' => true,
+        'url' => $url
     ]);
 })->name('home');
 
@@ -49,6 +51,7 @@ Route::get('/', function () {
  * GALLERY PAGE
  */
 Route::get('/galerie', function () {
+    $url = url()->current();
     $event_list = Event::select('name', 'id')->latest()->get();
     $image_list = Gallery::select('event', 'event_id', 'url')->get();
 
@@ -65,7 +68,8 @@ Route::get('/galerie', function () {
     return Inertia::render('Page/Gallery', [
         "imageList" => $image_list,
         'eventList' => $event_list,
-        'hideNav' => false
+        'hideNav' => false,
+        'url' => $url
     ]);
 })->name('gallery');
 
@@ -74,6 +78,7 @@ Route::get('/galerie', function () {
  * EVENT PAGE
  */
 Route::get('/events', function () {
+    $url = url()->current();
     $events = Event::orderBy('date', 'desc')->get();
 
     $events->transform(function ($event) {
@@ -85,7 +90,8 @@ Route::get('/events', function () {
     });
 
     return Inertia::render('Page/Events', [
-        'events' => $events
+        'events' => $events,
+        'url' => $url
     ]);
 })->name('events');
 
@@ -94,7 +100,11 @@ Route::get('/events', function () {
  * ABOUT US PAGE
  */
 Route::get('/ueber-uns', function () {
-    return Inertia::render('Page/About', []);
+    $url = url()->current();
+
+    return Inertia::render('Page/About', [
+        'url' => $url
+    ]);
 })->name('about');
 
 
@@ -102,6 +112,7 @@ Route::get('/ueber-uns', function () {
  * CREW PAGE
  */
 Route::get('/crew', function () {
+    $url = url()->current();
     $crew = Crew::orderBy('id')->get();
 
     $crew->transform(function ($member) {
@@ -112,6 +123,7 @@ Route::get('/crew', function () {
 
     return Inertia::render('Page/TheCrew', [
         'crew' => $crew,
+        'url' => $url
     ]);
 })->name('theCrew');
 
@@ -120,18 +132,26 @@ Route::get('/crew', function () {
  * CONTACT PAGE
  */
 Route::get('/kontakt', function () {
+    $url = url()->current();
     $error = Session::get('error');
     $success = Session::get('success');
 
     return Inertia::render('Page/Contact', [
         'error' => $error,
-        'success' => $success
+        'success' => $success,
+        'url' => $url
     ]);
 })->name('contact');
 
 // contact form post
 Route::post('/kontakt', [SendEmailController::class, 'index'])
     ->name('kontakt');
+
+
+/**
+ * SITEMAP
+ */
+Route::get('sitemap', [SitemapController::class, 'index']);
 
 
 /**

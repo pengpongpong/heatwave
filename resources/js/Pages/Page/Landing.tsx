@@ -17,12 +17,26 @@ type LandingData = {
 type LandingProps = {
     data: LandingData;
     hideNav: boolean;
+    url: string;
 }
 
 export default function Landing({ data, hideNav }: PageProps<LandingProps>) {
+    const seo = {
+        title: "Willkommen",
+        description: "",
+        keywords: "",
+        url: url,
+        image: {
+            url: "https://res.cloudinary.com/dzvrnl80x/image/upload/v1704816852/heatwave/heatwave_icon.webp",
+            width: "2250",
+            height: "1623",
+            alt: "Heatwave"
+        }
+    }
+
     return (
         <>
-            <MainLayout title="Heatwave" hideNav={hideNav}>
+            <MainLayout seo={seo} hideNav={hideNav}>
                 <div className="w-screen h-screen">
                     <Intro />
                 </div>
