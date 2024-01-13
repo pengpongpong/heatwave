@@ -38,14 +38,6 @@ $midnight: #181d31;
     gap: 0.5rem;
 }
 
-.modal {
-    display: none;
-
-    &[data-open="true"] {
-        display: flex;
-    }
-}
-
 .checkboxContainer {
     display: flex;
     justify-content: space-between;

@@ -41,6 +41,7 @@ Route::get('/', function (Request $request) {
     return Inertia::render('Page/Landing', [
         'data' => $data,
         'hideNav' => true,
+        'hideCookieBanner' => true,
         'url' => $url
     ]);
 })->name('home');
@@ -67,7 +68,6 @@ Route::get('/galerie', function () {
     return Inertia::render('Page/Gallery', [
         "imageList" => $image_list,
         'eventList' => $event_list,
-        'hideNav' => false,
         'url' => $url
     ]);
 })->name('gallery');

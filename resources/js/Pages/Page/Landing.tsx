@@ -17,10 +17,11 @@ type LandingData = {
 type LandingProps = {
     data: LandingData;
     hideNav: boolean;
+    hideCookieBanner: boolean;
     url: string;
 }
 
-export default function Landing({ data, hideNav, url }: PageProps<LandingProps>) {
+export default function Landing({ data, hideNav, hideCookieBanner, url }: PageProps<LandingProps>) {
     const seo = {
         title: "Willkommen",
         description: "",
@@ -36,7 +37,7 @@ export default function Landing({ data, hideNav, url }: PageProps<LandingProps>)
 
     return (
         <>
-            <MainLayout seo={seo} hideNav={hideNav}>
+            <MainLayout seo={seo} hideNav={hideNav} hideCookieBanner={hideCookieBanner}>
                 <div className="w-screen h-screen">
                     <Intro />
                 </div>

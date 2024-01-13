@@ -10,6 +10,7 @@ import GoogleAnalytics, { ConsentProps } from "@/Components/analytics/GoogleAnal
 type MainLayoutProps = {
     children: ReactNode;
     hideNav: boolean;
+    hideCookieBanner?: boolean;
     seo: SeoProps
 }
 
@@ -26,7 +27,7 @@ type SeoProps = {
     }
 }
 
-const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
+const MainLayout = ({ children, hideNav, hideCookieBanner, seo }: MainLayoutProps) => {
     const { consent = { analytics: false, advertise: false }, gtag = "" } = usePage<ConsentProps & { gtag: string }>().props;
 
     return (
@@ -61,7 +62,7 @@ const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
             </div>
             <CookieModalProvider>
                 {children}
-                <CookieBanner />
+                <CookieBanner hideCookieBanner={hideCookieBanner}/>
             </CookieModalProvider>
             <Footer />
         </>
