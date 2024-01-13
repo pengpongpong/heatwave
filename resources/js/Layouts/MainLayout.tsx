@@ -3,6 +3,8 @@ import { Head } from "@inertiajs/react";
 
 import Navbar from "@/Components/navbar/Navbar";
 import Footer from "@/Components/footer/Footer";
+import CookieBanner from "@/Components/cookie-banner/CookieBanner";
+import CookieModalProvider from "@/utils/CookieModalProvider";
 
 type MainLayoutProps = {
     children: ReactNode;
@@ -24,6 +26,10 @@ type SeoProps = {
 }
 
 const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
+
+
+
+
     return (
         <>
             <Head title={seo.title} >
@@ -53,7 +59,10 @@ const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
             <div className="flex justify-center">
                 <Navbar hideNav={hideNav} />
             </div>
-            {children}
+            <CookieModalProvider>
+                {children}
+                <CookieBanner />
+            </CookieModalProvider>
             <Footer />
         </>
     )

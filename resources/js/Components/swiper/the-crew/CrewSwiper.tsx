@@ -88,6 +88,7 @@ const CrewSwiper = ({ crew }: { crew: CrewProps[] }) => {
                 title={member.title}
                 text={member.description}
                 imgSrc={member.image_url}
+                key={member.id}
               />
             ))}
           </div>

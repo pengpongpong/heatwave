@@ -15,6 +15,7 @@ export default {
             colors: {
                 blue: "#007099",
                 lightBlue: "#dafbf7",
+                turquoise: "#01b9c3",
                 purple: "#535295"
             }
         },
