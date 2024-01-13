@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 
 import Navbar from "@/Components/navbar/Navbar";
 import Footer from "@/Components/footer/Footer";
 import CookieBanner from "@/Components/cookie-banner/CookieBanner";
 import CookieModalProvider from "@/utils/CookieModalProvider";
+import GoogleAnalytics, { ConsentProps } from "@/Components/analytics/GoogleAnalytics";
 
 type MainLayoutProps = {
     children: ReactNode;
@@ -26,9 +27,7 @@ type SeoProps = {
 }
 
 const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
-
-
-
+    const { consent = { analytics: false, advertise: false }, gtag = "" } = usePage<ConsentProps & { gtag: string }>().props;
 
     return (
         <>
@@ -56,6 +55,7 @@ const MainLayout = ({ children, hideNav, seo }: MainLayoutProps) => {
                     content="index, follow, noimageindex, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
                 />
             </Head>
+            <GoogleAnalytics consent={consent} gtag={gtag} />
             <div className="flex justify-center">
                 <Navbar hideNav={hideNav} />
             </div>

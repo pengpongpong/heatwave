@@ -95,6 +95,7 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
         setCookie("consent-advertise", "true")
 
         setOpen(false);
+        setConsent(true)
     }
 
     // save user settings
@@ -118,6 +119,7 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
         }
 
         setOpen(false);
+        setConsent(true)
     }
 
     // deny all
@@ -129,6 +131,7 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
         deleteCookie("consent-advertise")
 
         setOpen(false);
+        setConsent(true)
     }
 
     const bannerText =

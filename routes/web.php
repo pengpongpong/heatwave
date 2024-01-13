@@ -18,12 +18,13 @@ use App\Models\Gallery;
 use App\Models\Crew;
 
 use Carbon\Carbon;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 /**
  * HOME PAGE
  */
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
     $url = url()->current();
     $sanityClient = app('sanity');
 
@@ -36,8 +37,6 @@ Route::get('/', function () {
             "secondPortrait": images.secondPortrait.asset->url,
         }'
     );
-
-    $data['videoUrl'] = "";
 
     return Inertia::render('Page/Landing', [
         'data' => $data,
