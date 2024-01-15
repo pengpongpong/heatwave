@@ -7,7 +7,7 @@ const PhoneContainer = (props: Props) => {
         <div className="phone">
             <span id="speaker">Speaker</span>
             <span id="camera">Camera</span>
-            <video muted autoPlay loop disablePictureInPicture playsInline>
+            <video muted autoPlay loop disablePictureInPicture playsInline preload="none">
                 <source src="https://res.cloudinary.com/dzvrnl80x/video/upload/v1704394054/heatwave/intro-100k.mp4" />
             </video>
         </div>
