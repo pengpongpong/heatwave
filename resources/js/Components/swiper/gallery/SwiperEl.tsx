@@ -18,39 +18,72 @@ type SwiperElProps = {
         container?: string;
         swiper?: string
     },
+    lazy: boolean,
     onClick: () => void;
 } & SwiperGalleryProps;
 
 type SwiperSlideProps = {
     imageUrl: string;
     event: string;
+    lazy: boolean;
+    index: {
+        position: number;
+        length: number
+    }
     onClick: () => void;
 }
 
 // swiper slide
-const SwiperSlide = ({ imageUrl, event, onClick }: SwiperSlideProps) => {
+const SwiperSlide = ({ imageUrl, event, onClick, lazy, index }: SwiperSlideProps) => {
 
     return (
-        <div className="swiper-slide min-w-fit" onClick={onClick}>
-            <div className="swiper-material-wrapper">
-                <div className="swiper-material-content">
-                    {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
-                    <img
-                        className="swiper-material-image"
-                        data-swiper-material-scale="1"
-                        width={362}
-                        height={715}
-                        src={imageUrl}
-                        alt={event}
-                    />
+        lazy
+            ? <div className="swiper-slide min-w-fit" onClick={onClick}>
+                <div className="swiper-material-wrapper">
+                    <div className="swiper-material-content">
+                        {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
+                        <img
+                            className="swiper-material-image"
+                            data-swiper-material-scale="1"
+                            width={362}
+                            height={715}
+                            src={imageUrl}
+                            alt={event}
+                            loading="lazy"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+            : <div className="swiper-slide min-w-fit" onClick={onClick}>
+                <div className="swiper-material-wrapper">
+                    <div className="swiper-material-content">
+                        {/* add swiper-material-animate-opacity class for opacity slide in/out animation */}
+                        {index.position < 5
+                            ? <img
+                                className="swiper-material-image"
+                                data-swiper-material-scale="1"
+                                width={362}
+                                height={715}
+                                src={imageUrl}
+                                alt={event}
+                            />
+                            : <img
+                                className="swiper-material-image"
+                                data-swiper-material-scale="1"
+                                width={362}
+                                height={715}
+                                src={imageUrl}
+                                alt={event}
+                                loading="lazy"
+                            />}
+                    </div>
+                </div>
+            </div>
     )
 }
 
 // swiper element
-const SwiperEl = ({ data, className, onClick }: SwiperElProps) => {
+const SwiperEl = ({ data, className, onClick, lazy }: SwiperElProps) => {
     useEffect(() => {
         const swiper = new Swiper('.swiper', {
             modules: [EffectMaterial],
@@ -82,8 +115,8 @@ const SwiperEl = ({ data, className, onClick }: SwiperElProps) => {
         <div className={`swiper-container w-screen h-full ${className?.container}`}>
             <div className={`swiper mt-8 ${className?.swiper}`}>
                 <div className="swiper-wrapper">
-                    {data.map((event) => (
-                        <SwiperSlide imageUrl={event.url} event={event.event} key={event.url} onClick={onClick} />
+                    {data.map((event, index) => (
+                        <SwiperSlide imageUrl={event.url} event={event.event} key={event.url} onClick={onClick} lazy={lazy} index={{ position: index, length: data.length }} />
                     ))}
                 </div>
             </div>

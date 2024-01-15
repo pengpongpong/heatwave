@@ -29,8 +29,10 @@ const TheCrew = ({ crew, url }: TheCrewProps) => {
             seo={seo}
             hideNav={false}>
             <main className="w-full h-full flex-grow">
-                <PageHeadline title="Die Crew" />
-                <CrewSwiper crew={crew} />
+                {/* <PageHeadline title="Die Crew" /> */}
+                <div className="mt-8">
+                    <CrewSwiper crew={crew} />
+                </div>
             </main>
         </MainLayout>
     )

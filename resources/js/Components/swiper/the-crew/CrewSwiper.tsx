@@ -22,13 +22,13 @@ const CrewSwiperSlide = ({ title, imgSrc, text }: CrewSwiperSlideProps) => {
           <div className="crew-slider-title-text">{title}</div>
         </div>
         {/* <!-- slide image wrap --> */}
-        <div className="mt-24 lg:mt-36 h-fit crew-slider-scale">
+        <div className="crew-slider-scale">
           {/* <!-- slide image --> */}
           {/* <img src={imgSrc} /> */}
           <div id="active-slide" className="lg:mt-16 flex flex-col justify-center items-center lg:flex-row gap-8">
             <img className="w-[300px] h-[300px] rounded-xl" width={300} height={300} src={imgSrc} alt="" />
             <div className="p-4 flex flex-col justify-between items-center gap-8">
-              <p className="max-w-lg">{text}</p>
+              <p className="p-1 max-w-lg md:max-w-sm xl:max-w-xl">{text}</p>
               <ul className="flex gap-4">
                 <li className="mb-2">
                   <a
