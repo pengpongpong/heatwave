@@ -21,7 +21,6 @@ export const urlFor = (url: string) => {
 }
 
 type ConsentType = "consent" | "consent-required" | "consent-analytics" | "consent-advertise"
-type Consent = "granted" | "partial" | "denied" | "true" | "false"
 
 export type Locale = "en" | "de"
 
@@ -29,22 +28,8 @@ export type Props = {
     lang: Locale
 }
 
-// set local storage
-export const setConsentLocalStorage = (consent: ConsentType, value: Consent) => {
-    return localStorage.setItem(consent, value)
-}
-
-// get local storage
-export const getConsentLocalStorage = (consent: ConsentType) => {
-    return localStorage.getItem(consent)
-}
-// remove local storage
-export const removeConsentLocalStorage = (consent: ConsentType) => {
-    return localStorage.removeItem(consent)
-}
-
 // set cookie
-export const setCookie = (item: ConsentType, value: Consent) => {
+export const setCookie = (item: ConsentType, value: string) => {
     if (!window) return console.error("no window defined")
 
     return document.cookie = `${item}=${value}; max-age=31536000;Secure;SameSite=Strict`

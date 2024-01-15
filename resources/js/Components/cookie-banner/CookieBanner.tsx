@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, InputHTMLAttributes, forwardRef, useContext, useEffect, useRef, useState, MouseEvent } from 'react'
+import { ButtonHTMLAttributes, InputHTMLAttributes, forwardRef, useEffect, useRef, useState, MouseEvent } from 'react'
 import { easeInOut, inView, motion } from "framer-motion"
-import { deleteCookie, setConsentLocalStorage, getConsentLocalStorage, setCookie, getCookie } from "@/utils/utils"
-import CookieModalContext from "@/utils/CookieModalContext"
+import { deleteCookie, setCookie, getCookie } from "@/utils/utils"
+import { setConsentStore, setCookieModalStore, useConsentStore } from "@/utils/store"
 import "./cookie-banner.scss"
 
 const Button = ({ children, className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => {
@@ -27,22 +27,27 @@ const Checkbox = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputEleme
 const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean }) => {
     const analyticsRef = useRef<HTMLInputElement>(null)
     const advertiseRef = useRef<HTMLInputElement>(null)
-    const [consent, setConsent] = useState(true)
     const [active, setActive] = useState(hideCookieBanner ? false : true)
 
-    const { state, dispatch } = useContext(CookieModalContext)
+    const open = useConsentStore((state) => (state.cookieModal))
+    const consentState = useConsentStore((state) => (state.consent))
 
     // set consent in modal to user settings if reload
     useEffect(() => {
         if (!analyticsRef.current || !advertiseRef.current) return
+        const consentCookie = getCookie("consent") ?? ""
 
-        const consentLocal = getConsentLocalStorage("consent")
+        let consent = "";
+        if (consentCookie) {
+            const { userConsent = "" } = JSON.parse(consentCookie)
+            consent = userConsent
+        }
 
         // show cookie banner if no consent
-        if (!consentLocal) {
-            setConsent(false)
-        } else if (consentLocal === "granted" || consentLocal === "denied" || consentLocal === "partial") {
-            setConsent(true)
+        if (!consent) {
+            setConsentStore(false)
+        } else if (consent === "granted" || consent === "denied" || consent === "partial") {
+            setConsentStore(true)
         }
 
         const analyticsConsent = analyticsRef.current
@@ -62,8 +67,19 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
 
     }, [])
 
+    // set open/close state 
     const setOpen = (open: boolean) => {
-        dispatch({ type: "SET_OPEN", payload: open })
+        setCookieModalStore(open)
+    }
+
+    // Set consent to cookie
+    const setConsent = (consent: string) => {
+        const userConsent = {
+            userConsent: consent,
+            datestamp: new Date()
+        }
+
+        setCookie("consent", JSON.stringify(userConsent))
     }
 
     // open cookie settings
@@ -90,19 +106,19 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
     const acceptConsent = (e: MouseEvent) => {
         e.preventDefault();
 
-        setConsentLocalStorage("consent", "granted")
+        setConsent("granted")
         setCookie("consent-analytics", "true")
         setCookie("consent-advertise", "true")
 
         setOpen(false);
-        setConsent(true)
+        setConsentStore(true)
     }
 
     // save user settings
     const saveSettingConsent = (e: MouseEvent) => {
         e.preventDefault();
 
-        setConsentLocalStorage("consent", "partial")
+        setConsent("partial")
 
         if (!analyticsRef.current || !advertiseRef.current) return;
 
@@ -119,19 +135,19 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
         }
 
         setOpen(false);
-        setConsent(true)
+        setConsentStore(true)
     }
 
     // deny all
     const denyConsent = (e: MouseEvent) => {
         e.preventDefault();
 
-        setConsentLocalStorage("consent", "denied")
+        setConsent("denied")
         deleteCookie("consent-analytics")
         deleteCookie("consent-advertise")
 
         setOpen(false);
-        setConsent(true)
+        setConsentStore(true)
     }
 
     const bannerText =
@@ -158,7 +174,7 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
 
     return (
         <>
-            {!consent
+            {!consentState
                 ? <motion.div
                     initial={{
                         y: "200%"
@@ -172,7 +188,7 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
                         duration: .5,
                         ease: easeInOut
                     }}
-                    className="w-full h-fit max-w-[90%] my-4 mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center rounded-xl fixed bottom-0 z-50 text-lightBlue cookieBanner" data-consent={`${consent}`}>
+                    className="w-full h-fit max-w-[90%] my-4 mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center rounded-xl fixed bottom-0 z-50 text-lightBlue cookieBanner" data-consent={`${consentState}`}>
                     <a className="underline" href="/datenschutz">{bannerText.privacyAnchor}</a>
                     <span className="m-4 lg:my-0 text-center">Diese Seite verwendet Cookies für ein besseres Erlebnis. Durch die Nutzung dieser Website stimmen Sie der Cookie-Richtlinie der Website zu.</span>
                     <div className="flex gap-4">
@@ -182,10 +198,10 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
                 </motion.div>
                 : null}
 
-            <div data-open={`${state.open}`} id="backdrop"></div>
+            <div data-open={`${open}`} id="backdrop"></div>
 
-            <div className={`w-full h-full fixed top-0 left-0 ${state.open ? "flex" : "hidden"} items-center z-50`}>
-                <dialog id="cookie-modal" className="max-w-sm lg:max-w-xl mx-auto py-2 px-4 relative rounded-xl text-lightBlue" open={state.open}>
+            <div className={`w-full h-full fixed top-0 left-0 ${open ? "flex" : "hidden"} items-center z-50`}>
+                <dialog id="cookie-modal" className="max-w-sm lg:max-w-xl mx-auto py-2 px-4 relative rounded-xl text-lightBlue" open={open}>
                     <button className="absolute top-4 right-4" onClick={closeModal} aria-label="Schließe Cookie Einstellungen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-lightBlue hover:fill-black duration-200 transition-colors"><path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z"></path><path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z"></path></svg>
                     </button>

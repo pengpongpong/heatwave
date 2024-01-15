@@ -4,7 +4,6 @@ import { Head, usePage } from "@inertiajs/react";
 import Navbar from "@/Components/navbar/Navbar";
 import Footer from "@/Components/footer/Footer";
 import CookieBanner from "@/Components/cookie-banner/CookieBanner";
-import CookieModalProvider from "@/utils/CookieModalProvider";
 import GoogleAnalytics, { ConsentProps } from "@/Components/analytics/GoogleAnalytics";
 
 type MainLayoutProps = {
@@ -60,10 +59,8 @@ const MainLayout = ({ children, hideNav, hideCookieBanner, seo }: MainLayoutProp
             <div className="flex justify-center">
                 <Navbar hideNav={hideNav} />
             </div>
-            <CookieModalProvider>
-                {children}
-                <CookieBanner hideCookieBanner={hideCookieBanner}/>
-            </CookieModalProvider>
+            {children}
+            <CookieBanner hideCookieBanner={hideCookieBanner} />
             <Footer />
         </>
     )

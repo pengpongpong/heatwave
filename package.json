@@ -33,6 +33,7 @@
         "@types/three": "^0.159.0",
         "framer-motion": "^10.16.16",
         "swiper": "^11.0.5",
-        "three": "^0.159.0"
+        "three": "^0.159.0",
+        "zustand": "^4.4.7"
     }
 }
