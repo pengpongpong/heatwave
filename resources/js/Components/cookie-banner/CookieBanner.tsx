@@ -23,7 +23,7 @@ const Checkbox = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputEleme
     );
 });
 
-
+// ! add to session storage
 const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean }) => {
     const analyticsRef = useRef<HTMLInputElement>(null)
     const advertiseRef = useRef<HTMLInputElement>(null)
@@ -44,9 +44,9 @@ const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean
         }
 
         // show cookie banner if no consent
-        if (!consent) {
+        if (!consent && !consentState) {
             setConsentStore(false)
-        } else if (consent === "granted" || consent === "denied" || consent === "partial") {
+        } else if (consent === "granted" || consent === "denied" || consent === "partial" || consentState === true) {
             setConsentStore(true)
         }
 
