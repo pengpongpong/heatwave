@@ -23,7 +23,6 @@ const Checkbox = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputEleme
     );
 });
 
-// ! add to session storage
 const CookieBanner = ({ hideCookieBanner = false }: { hideCookieBanner?: boolean }) => {
     const analyticsRef = useRef<HTMLInputElement>(null)
     const advertiseRef = useRef<HTMLInputElement>(null)

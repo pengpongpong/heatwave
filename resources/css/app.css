@@ -17,14 +17,15 @@
 }
 
 html {
-    background: var(--turquoise);
+  background: var(--turquoise);
 }
 
 body {
-    width: 100vw;
-    background: radial-gradient(var(--turquoise) 70%, var(--purple) 110%);
-    font-family: "coolvetica", sans-serif;
-    overflow-x: hidden;
+  width: 100vw;
+  font-family: "coolvetica", sans-serif;
+  overflow-x: hidden;
+  background: radial-gradient(var(--turquoise) 70%, var(--purple) 110%);
+  background-size: cover;
 }
 
 /* scroll-bar */
