@@ -34,7 +34,7 @@ const Gallery = ({ hideNav, imageList, eventList, url }: GalleryProps) => {
     <MainLayout seo={seo} hideNav={hideNav}>
       <main className="flex-grow">
         <PageHeadline title="Galerie" />
-        <ul>
+        <ul className="mt-6 lg:mt-8">
           {
             eventList.map((event) => {
               return <li className="mb-8" key={event.id}>

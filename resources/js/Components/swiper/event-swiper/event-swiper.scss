@@ -12,6 +12,10 @@
   @media screen and (min-width: 1024px) {
     height: 75vh;
   }
+  
+  @media screen and (min-width: 2000px) {
+    margin-top: 4rem;
+  }
 }
 
 .expanding-collection {
@@ -20,6 +24,14 @@
   .swiper-slide {
     width: 500px;
     max-width: calc(100% - 32px - 32px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 1024px) {
+      justify-content: flex-start;
+    }
   }
 
   &-cover {
@@ -30,13 +42,18 @@
         height: 20rem;
         aspect-ratio: 1 / 1;
         object-fit: fit;
+
+        @media screen and (min-width: 500px) {
+          width: 500px;
+          height: 500px;
+        }
       }
     }
   }
 
   &-content,
   &-content-inner {
-    background: var(--color);
+    background: var(--purple);
     color: #dafbf7;
   }
 }

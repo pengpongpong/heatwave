@@ -20,10 +20,10 @@ type EventSwiperSlideProps = {
 // Swiper slide
 const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl, index }: EventSwiperSlideProps) => {
     const handle = () => {
-        const html = document.querySelector("html");
-        if (!html) return
+        const body = document.querySelector("body");
+        if (!body) return
 
-        html.style.setProperty("--color", "var(--purple)")
+        body.style.setProperty("--color", "#535295")
     }
 
     return (
