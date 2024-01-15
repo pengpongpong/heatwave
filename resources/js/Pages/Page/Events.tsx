@@ -24,9 +24,11 @@ const Events = ({ events, url }: EventsProps) => {
 
   return (
     <MainLayout seo={seo} hideNav={false}>
-      <main className="flex flex-col flex-grow items-center">
+      <main className="h-fit flex flex-col flex-grow items-center">
         <PageHeadline title="Aktuelle Events" />
-        <EventSwiper events={events} />
+        <div className="mt-8 lg:mt-0">
+          <EventSwiper events={events} />
+        </div>
       </main>
     </MainLayout>
   )

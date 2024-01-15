@@ -39,6 +39,7 @@ const Heatwave = () => {
                 font="https://res.cloudinary.com/dzvrnl80x/raw/upload/v1704814014/heatwave/coolvetica_rg.otf"
                 fontSize={.06}
                 position={[0, -1.5, 2]}
+                color="#000"
                 textAlign="center"
             >
                 {scrollProgress.toFixed(0)}%

@@ -1,8 +1,8 @@
 import { useLayoutEffect } from 'react'
 import createExpandingCollection from './expanding-collection';
+import { EventProps } from "@/types";
 import './expanding-collection.scss';
 import './event-swiper.scss';
-import { EventProps } from "@/types";
 
 type EventSwiperSlideProps = {
     title: string;
@@ -20,12 +20,10 @@ type EventSwiperSlideProps = {
 // Swiper slide
 const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl, index }: EventSwiperSlideProps) => {
     const handle = () => {
-        if (index.position === index.length - 1) {
-            const html = document.querySelector("html");
-            if (!html) return
+        const html = document.querySelector("html");
+        if (!html) return
 
-            html.style.setProperty("--color", "var(--purple)")
-        }
+        html.style.setProperty("--color", "var(--purple)")
     }
 
     return (
@@ -36,7 +34,7 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl, inde
                         <div className="expanding-collection-content-inner">
                             <div>
                                 <div className="text-center text-xl xl:text-2xl">{title + " - " + location}</div>
-                                <div className="mt-6 flex justify-between xl:text-lg">
+                                <div className="mt-2 flex justify-between xl:text-lg">
                                     <div className="flex flex-col">
                                         <span>{location}</span>
                                         <span>{date} - {time}</span>
@@ -45,15 +43,17 @@ const EventSwiperSlide = ({ title, location, time, date, artists, imageUrl, inde
                                         <span>{artists}</span>
                                     </div>
                                 </div>
+                                <span className="w-full inline-block text-center">Kaufe Tickets <a href="#" className="underline">hier</a></span>
                             </div>
                         </div>
                     </div>
 
                     {/* Expanding collection cover */}
                     <div className="expanding-collection-cover">
-                        {index.position > 0
-                            ? <img src={imageUrl} width={500} height={500} />
-                            : <img src={imageUrl} width={500} height={500} onLoad={handle} loading="lazy"/>}
+                        {index.position > 1
+                            ? <img src={imageUrl} width={500} height={500} onLoad={handle} loading="lazy" />
+                            : <img src={imageUrl} width={500} height={500} />
+                        }
 
                     </div>
                 </div>

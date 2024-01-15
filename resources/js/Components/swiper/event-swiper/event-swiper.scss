@@ -4,9 +4,14 @@
 
 #event {
   width: 100vw;
+  height: 70vh;
   display: flex;
   flex-grow: 1;
   justify-content: center;
+
+  @media screen and (min-width: 1024px) {
+    height: 75vh;
+  }
 }
 
 .expanding-collection {
