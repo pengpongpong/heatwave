@@ -194,6 +194,7 @@ return [
 
     'aws_bucket' => env('AWS_BUCKET'),
     'aws_region' => env('AWS_DEFAULT_REGION'),
+    'aws_url' => env('AWS_URL'),
 
     'gtag_id' => env('GTAG')
 ];

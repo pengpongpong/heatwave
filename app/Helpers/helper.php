@@ -8,7 +8,7 @@ class Helper
 {
     public static function awsPath(string $path = null)
     {
-        $aws_path = 'https://' . config('app.aws_bucket') . '.s3.' . config('app.aws_region') . '.amazonaws.com/' . $path;
+        $aws_path = config('app.aws_url') . '/' . $path;
         return $aws_path;
     }
 
