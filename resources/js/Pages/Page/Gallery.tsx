@@ -32,7 +32,7 @@ const Gallery = ({ hideNav, imageList, eventList, url }: GalleryProps) => {
 
   return (
     <MainLayout seo={seo} hideNav={hideNav}>
-      <main className="flex-grow">
+      <main className="flex-grow overflow-hidden">
         <PageHeadline title="Galerie" />
         <ul className="mt-6 lg:mt-8">
           {

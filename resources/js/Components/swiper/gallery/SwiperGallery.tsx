@@ -58,11 +58,13 @@ const SwiperGallery = ({ data, index }: SwiperGalleryProps) => {
                         <button onClick={closeModal} className="absolute right-6 top-6 z-30">
                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" style={{ fill: "#000000" }}><path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z"></path><path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z"></path></svg>
                         </button>
-                        <SwiperModal
-                            data={data}
-                            index={index}
-                            className={{ swiper: "h-[55vh] lg:h-[60vh] z-50", container: `w-[90vw] p-4 z-20 relative flex flex-col items-center ${open ? "visible opacity-100" : "invisible opacity-0"} transition-opacity duration-100 ease-in-out` }}
-                        />
+                        <div className="overflow-hidden">
+                            <SwiperModal
+                                data={data}
+                                index={index}
+                                className={{ swiper: "h-[55vh] lg:h-[60vh] z-50", container: `w-[90vw] p-4 z-20 relative flex flex-col items-center ${open ? "visible opacity-100" : "invisible opacity-0"} transition-opacity duration-100 ease-in-out` }}
+                            />
+                        </div>
                     </div>
                 </>}
         </>

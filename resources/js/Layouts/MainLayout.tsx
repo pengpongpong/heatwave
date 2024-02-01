@@ -60,7 +60,7 @@ const MainLayout = ({ children, hideNav, hideCookieBanner, seo }: MainLayoutProp
                 <Navbar hideNav={hideNav} />
             </div>
             {children}
-            <CookieBanner hideCookieBanner={hideCookieBanner} />
+            <CookieBanner hideCookieBanner={hideCookieBanner} /> 
             <Footer />
         </>
     )

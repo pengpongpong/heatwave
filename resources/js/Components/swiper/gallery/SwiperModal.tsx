@@ -26,7 +26,7 @@ const SwiperModal = ({ data, className, index }: SwiperModalProps) => {
 
     useEffect(() => {
         const swiper = new Swiper(`.swiper-thumbs-${index}`, {
-            modules: [EffectMaterial, Navigation],
+            modules: [EffectMaterial],
             effect: 'material',
             grabCursor: true,
             slidesPerView: 1,
